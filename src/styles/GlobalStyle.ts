@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'NanumBarunGothic', 'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo','돋움',sans-serif;
+    font-family: 'NanumBarunGothic', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', '돋움', sans-serif;
     font-size: 1.6rem;
     background: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.text}

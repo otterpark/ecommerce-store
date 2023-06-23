@@ -4,6 +4,7 @@ const defaultTheme = {
     text: '#000000',
     primary: '#F00000',
     secondary: '#00FFFF',
+    border: '#e1e1e1',
   },
 };
 
