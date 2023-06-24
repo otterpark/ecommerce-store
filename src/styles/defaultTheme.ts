@@ -6,6 +6,10 @@ const defaultTheme = {
     secondary: '#00FFFF',
     border: '#e1e1e1',
   },
+  maxWidth: {
+    full: 1140,
+    middle: 340,
+  },
 };
 
 export default defaultTheme;

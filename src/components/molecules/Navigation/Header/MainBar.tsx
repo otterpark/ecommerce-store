@@ -6,6 +6,7 @@ import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 
 import { BaseBoxPadding } from '@/styles/commonStyle';
 import { breakpoints } from '@/styles/medias';
+import defaultTheme from '@/styles/defaultTheme';
 
 const MainBarWrap = styled.div`
   ${BaseBoxPadding}
@@ -23,7 +24,9 @@ const MainBarDiv = styled.div`
 export default function MainBar() {
   return (
     <MainBarWrap>
-      <MaxWidthWrap>
+      <MaxWidthWrap
+        maxWidth={defaultTheme.maxWidth.full}
+      >
         <MainBarDiv>
           <Logo />
           <Nav />
