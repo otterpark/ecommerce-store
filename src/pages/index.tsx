@@ -3,18 +3,23 @@ import Header from '@/components/organisms/Header';
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import defaultTheme from '@/styles/defaultTheme';
 
-const Container = styled.div`
+const HomeContainer = styled.div``;
+
+const HomeWrap = styled.div`
+  padding: ${(props) => `${props.theme.interval.page.paddingHorizontal} 0 ${props.theme.interval.page.paddingVertical}`};
 `;
 
 export default function Home() {
   return (
-    <Container>
+    <HomeContainer>
       <Header />
-      <MaxWidthWrap
-        maxWidth={defaultTheme.maxWidth.full}
-      >
-        Hello World!
-      </MaxWidthWrap>
-    </Container>
+      <HomeWrap>
+        <MaxWidthWrap
+          maxWidth={defaultTheme.maxWidth.full}
+        >
+          Hello World!
+        </MaxWidthWrap>
+      </HomeWrap>
+    </HomeContainer>
   );
 }

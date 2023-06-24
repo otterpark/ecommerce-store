@@ -54,7 +54,6 @@ const StyledBurger = styled.button<ToggleProps>`
 const Navigation = styled.ul<ToggleProps>`
   margin-left: 3.2rem;
   li {
-    font-size: 1.6rem;
     padding: 1.6rem 0;
   }
   ${breakpoints.tablet} {
