@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@/utils/tests/wrapThemeProvider';
 import Header from '.';
 
 describe('Header', () => {
