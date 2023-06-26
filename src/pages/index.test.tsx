@@ -1,8 +1,8 @@
 import { render, screen } from '@/utils/tests/wrapThemeProvider';
 import Home from '.';
 
-describe('Home ', () => {
-  it('render test', () => {
+describe('HomePage ', () => {
+  it('render page', () => {
     render(<Home />);
 
     expect(screen.getByText('Hello World!')).toBeInTheDocument();

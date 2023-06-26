@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 
 import { BaseBoxPadding } from '@/styles/commonStyle';
-import defaultTheme from '@/styles/defaultTheme';
+import { maxWidth } from '@/styles/sizes';
 
 const TopBarWrap = styled.div`
   ${BaseBoxPadding}
@@ -30,14 +30,14 @@ export default function TopBar() {
     // TODO: 링크 수정
     <TopBarWrap>
       <MaxWidthWrap
-        maxWidth={defaultTheme.maxWidth.full}
+        maxWidth={maxWidth.full}
       >
         <TopBarUl>
           <li>
-            <Link href="/">로그인</Link>
+            <Link href="/member/login">로그인</Link>
           </li>
           <li>
-            <Link href="/">회원가입</Link>
+            <Link href="/member/signup">회원가입</Link>
           </li>
         </TopBarUl>
       </MaxWidthWrap>

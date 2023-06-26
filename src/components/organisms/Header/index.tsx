@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import TopBar from '@/components/molecules/Navigation/Header/TopBar';
-import MainBar from '@/components/molecules/Navigation/Header/MainBar';
+import TopBar from '@/components/molecules/navigations/TopBar';
+import MainBar from '@/components/molecules/navigations/MainBar';
 
 const Container = styled.header`
   border-bottom: 1px solid ${(props) => props.theme.colors.border};

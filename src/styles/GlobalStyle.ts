@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { fontSize } from './sizes';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -17,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'NanumBarunGothic', 'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', '돋움', sans-serif;
-    font-size: ${(props) => props.theme.fontSize.default};
+    font-size: ${fontSize.default};
     background: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.text}
   }

@@ -1,16 +1,40 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import styled from 'styled-components';
+import { ReactNode, ButtonHTMLAttributes } from 'react';
 
-type ButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
+import { BaseBoxPadding } from '@/styles/commonStyle';
+import { fontSize } from '@/styles/sizes';
 
-export default function Button({ ...props }: ButtonProps) {
-  const { children, ...rest } = props;
+type ButtonProps = {
+  children: ReactNode,
+  isPrimary?: boolean,
+} & ButtonHTMLAttributes<HTMLButtonElement>
+
+const DefaultButton = styled.button<ButtonProps>`
+  background: ${(props) => (props.isPrimary ? props.theme.colors.primary : 'white')};
+  color: ${(props) => (props.isPrimary ? 'white' : props.theme.colors.text)};
+  ${BaseBoxPadding};
+  height: 54px;
+  width: 100%;
+  border: 1px solid ${(props) => (props.isPrimary ? props.theme.colors.primary : props.theme.colors.border)};
+  border-radius: 8px;
+  font-size: ${fontSize.s};
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+export default function Button({
+  children,
+  isPrimary = false,
+  ...props
+}: ButtonProps) {
   return (
-    <button
+    <DefaultButton
       type="button"
+      isPrimary={isPrimary}
       // eslint-disable-next-line react/jsx-props-no-spreading
-      {...rest}
+      {...props}
     >
       {children}
-    </button>
+    </DefaultButton>
   );
 }

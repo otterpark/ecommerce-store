@@ -1,7 +1,16 @@
 import { css } from 'styled-components';
-import defaultTheme from './defaultTheme';
+import { interval } from './sizes';
 
-// eslint-disable-next-line import/prefer-default-export
 export const BaseBoxPadding = css`
-  padding: ${defaultTheme.interval.content.paddingHorizontal} ${defaultTheme.interval.content.paddingVertical};
+  padding: ${interval.content.paddingHorizontal} ${interval.content.paddingVertical};
+`;
+
+export const FlexColumn = css`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const FlexRow = css`
+  display: flex;
+  flex-direction: row;
 `;

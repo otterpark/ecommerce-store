@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@/utils/tests/wrapThemeProvider';
 import userEvent from '@testing-library/user-event';
 
 import Button from './Button';
