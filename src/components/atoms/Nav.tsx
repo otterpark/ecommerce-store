@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import useWindowSize from '@/hooks/useWindowResize';
+
 import { breakpoints, size } from '@/styles/medias';
+import Menu from './Menu';
 
 type ToggleProps = {
   isToggled: boolean;
@@ -51,27 +54,6 @@ const StyledBurger = styled.button<ToggleProps>`
   }
 `;
 
-const Navigation = styled.ul<ToggleProps>`
-  margin-left: 3.2rem;
-  li {
-    padding: 1.6rem 0;
-  }
-  ${breakpoints.tablet} {
-    position: absolute;
-    top: 111.5px;
-    left: 0;
-    width: 100%;
-    margin-left: 0;
-    border-bottom: 1px solid #e0e0e0;
-    background: white;
-    z-index: ${(props) => (props.isToggled ? '1' : '-1')};
-    opacity: ${(props) => (props.isToggled ? '1' : '0')};
-    li {
-      padding: 1.6rem 2.4rem;
-    }
-  }
-`;
-
 export default function Nav() {
   const windowSize = useWindowSize();
   const [isToggled, setIsToggled] = useState<boolean>(false);
@@ -84,11 +66,7 @@ export default function Nav() {
 
   return (
     <>
-      <Navigation
-        isToggled={isToggled}
-      >
-        <li>Products</li>
-      </Navigation>
+      <Menu isToggled={isToggled} />
       <StyledBurger
         isToggled={isToggled}
         onClick={() => setIsToggled(!isToggled)}

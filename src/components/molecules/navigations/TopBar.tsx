@@ -7,7 +7,7 @@ import { maxWidth } from '@/styles/sizes';
 
 const TopBarWrap = styled.div`
   ${BaseBoxPadding}
-  background-color: #e0e0e0;
+  background-color: ${(props) => props.theme.colors.backgroundSecondary};
 `;
 
 const TopBarUl = styled.ul`
