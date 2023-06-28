@@ -9,7 +9,6 @@ const HomeContainer = styled.div``;
 export default function HomePage() {
   return (
     <HomeContainer>
-      <Header />
       <PageWrap>
         <MaxWidthWrap
           maxWidth={maxWidth.full}

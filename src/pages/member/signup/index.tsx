@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 import PageTitle from '@/components/atoms/titles/PageTitle';
-import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import PageWrap from '@/components/atoms/wrap/PageWrap';
-import Header from '@/components/organisms/Header';
-
-import { maxWidth, space } from '@/styles/sizes';
+import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import InputText from '@/components/molecules/inputs/InputText';
 import Button from '@/components/atoms/buttons/Button';
+
+import { maxWidth, space } from '@/styles/sizes';
 import { FlexColumn } from '@/styles/commonStyle';
 
 const Container = styled.div`
@@ -28,7 +27,6 @@ const ButtonWrap = styled.div`
 export default function SignupPage() {
   return (
     <Container>
-      <Header />
       <PageWrap>
         <MaxWidthWrap
           maxWidth={maxWidth.middle}

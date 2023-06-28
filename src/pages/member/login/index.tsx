@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
+import Link from 'next/link';
+
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import PageWrap from '@/components/atoms/wrap/PageWrap';
-import Header from '@/components/organisms/Header';
 import PageTitle from '@/components/atoms/titles/PageTitle';
-
-import { maxWidth, space } from '@/styles/sizes';
 import InputText from '@/components/molecules/inputs/InputText';
 import Button from '@/components/atoms/buttons/Button';
-import Link from 'next/link';
+
+import { maxWidth, space } from '@/styles/sizes';
 import { FlexColumn } from '@/styles/commonStyle';
 
 const Container = styled.div``;
@@ -27,7 +27,6 @@ const ButtonWrap = styled.div`
 export default function LoginPage() {
   return (
     <Container>
-      <Header />
       <PageWrap>
         <MaxWidthWrap maxWidth={maxWidth.middle}>
           <PageTitle title="로그인" mb={space.m} />
