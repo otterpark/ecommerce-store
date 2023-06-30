@@ -1,5 +1,5 @@
 import defaultTheme from '@/styles/defaultTheme';
-import { borderRidius } from '@/styles/sizes';
+import { borderRadius } from '@/styles/sizes';
 import styled from 'styled-components';
 
 type LoadingSpinnerProps = {
@@ -14,7 +14,7 @@ const Spinner = styled.div<LoadingSpinnerProps>`
   height: 3rem;
   border: .3rem solid ${(props) => props.color};
   border-top: .3rem solid transparent;
-  border-radius: ${borderRidius.full};
+  border-radius: ${borderRadius.full};
   margin: 0 auto;
 
   -webkit-animation: spin 1s linear infinite;

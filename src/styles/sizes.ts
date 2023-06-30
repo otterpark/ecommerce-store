@@ -26,7 +26,7 @@ export const space = {
   l: '4.8rem',
 };
 
-export const borderRidius = {
+export const borderRadius = {
   defalut: '.8rem',
   full: '50%',
 };

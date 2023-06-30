@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactNode, ButtonHTMLAttributes } from 'react';
 
 import { BaseBoxPadding } from '@/styles/commonStyle';
-import { borderRidius, fontSize } from '@/styles/sizes';
+import { borderRadius, fontSize } from '@/styles/sizes';
 
 type ButtonProps = {
   type?: 'button' | 'submit',
@@ -18,7 +18,7 @@ const DefaultButton = styled.button<ButtonProps>`
   height: 54px;
   width: 100%;
   border: 1px solid ${(props) => (props.isPrimary ? props.theme.colors.primary : props.theme.colors.border)};
-  border-radius: ${borderRidius.defalut};
+  border-radius: ${borderRadius.defalut};
   font-size: ${fontSize.s};
   font-weight: bold;
   cursor: pointer;
