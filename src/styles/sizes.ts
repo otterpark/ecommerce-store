@@ -27,7 +27,7 @@ export const space = {
 };
 
 export const borderRadius = {
-  defalut: '.8rem',
+  default: '.8rem',
   full: '50%',
 };
 

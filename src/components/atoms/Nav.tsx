@@ -31,7 +31,7 @@ const StyledBurger = styled.button<ToggleProps>`
     width: 2rem;
     height: 0.25rem;
     background: #0D0C1D;
-    border-radius: ${borderRadius.defalut};
+    border-radius: ${borderRadius.default};
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 1px;

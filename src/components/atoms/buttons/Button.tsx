@@ -4,11 +4,14 @@ import { ReactNode, ButtonHTMLAttributes } from 'react';
 import { BaseBoxPadding } from '@/styles/commonStyle';
 import { borderRadius, fontSize } from '@/styles/sizes';
 
+type BorderRadius = `${number} ${number} ${number} ${number}` | `${number}`;
+
 type ButtonProps = {
   type?: 'button' | 'submit',
   children: ReactNode,
   isPrimary?: boolean,
   isDisabled?: boolean,
+  borderRadius?: BorderRadius;
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 const DefaultButton = styled.button<ButtonProps>`
@@ -18,7 +21,7 @@ const DefaultButton = styled.button<ButtonProps>`
   height: 54px;
   width: 100%;
   border: 1px solid ${(props) => (props.isPrimary ? props.theme.colors.primary : props.theme.colors.border)};
-  border-radius: ${borderRadius.defalut};
+  border-radius: ${(props) => ((props.borderRadius) ? props.borderRadius : borderRadius.default)};
   font-size: ${fontSize.s};
   font-weight: bold;
   cursor: pointer;

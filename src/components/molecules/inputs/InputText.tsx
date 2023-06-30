@@ -18,7 +18,7 @@ const Input = styled.input<InputHTMLAttributes<HTMLInputElement>>`
   height: 54px;
   width: 100%;
   border: 1px solid ${(props) => props.theme.colors.border};
-  border-radius: ${borderRadius.defalut};
+  border-radius: ${borderRadius.default};
 
   font-size: ${fontSize.s};
   ::placeholder {
