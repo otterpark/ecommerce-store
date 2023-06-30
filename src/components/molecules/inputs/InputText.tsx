@@ -1,14 +1,14 @@
-import { BaseBoxPadding } from '@/styles/commonStyle';
-import { fontSize } from '@/styles/sizes';
 import { InputHTMLAttributes, useRef } from 'react';
 import styled from 'styled-components';
+
+import { BaseBoxPadding } from '@/styles/commonStyle';
+import { borderRidius, fontSize } from '@/styles/sizes';
 
 type InputTextProps = {
   type: 'text'| 'password' | 'email';
   label: string;
 } & InputHTMLAttributes<HTMLInputElement>
 
-// type InputProps = {}
 const Label = styled.label`
   display: none;
 `;
@@ -18,7 +18,8 @@ const Input = styled.input<InputHTMLAttributes<HTMLInputElement>>`
   height: 54px;
   width: 100%;
   border: 1px solid ${(props) => props.theme.colors.border};
-  border-radius: 8px;
+  border-radius: ${borderRidius.defalut};
+
   font-size: ${fontSize.s};
   ::placeholder {
     color: ${(props) => props.theme.colors.gray};

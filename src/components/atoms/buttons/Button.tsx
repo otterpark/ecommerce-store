@@ -2,11 +2,13 @@ import styled from 'styled-components';
 import { ReactNode, ButtonHTMLAttributes } from 'react';
 
 import { BaseBoxPadding } from '@/styles/commonStyle';
-import { fontSize } from '@/styles/sizes';
+import { borderRidius, fontSize } from '@/styles/sizes';
 
 type ButtonProps = {
+  type?: 'button' | 'submit',
   children: ReactNode,
   isPrimary?: boolean,
+  isDisabled?: boolean,
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
 const DefaultButton = styled.button<ButtonProps>`
@@ -16,21 +18,29 @@ const DefaultButton = styled.button<ButtonProps>`
   height: 54px;
   width: 100%;
   border: 1px solid ${(props) => (props.isPrimary ? props.theme.colors.primary : props.theme.colors.border)};
-  border-radius: 8px;
+  border-radius: ${borderRidius.defalut};
   font-size: ${fontSize.s};
   font-weight: bold;
   cursor: pointer;
+  transition: opacity .3s linear;
+  :disabled {
+    opacity: .6;
+    cursor: auto;
+  }
 `;
 
 export default function Button({
   children,
+  isDisabled = false,
   isPrimary = false,
+  type = 'button',
   ...props
 }: ButtonProps) {
   return (
     <DefaultButton
-      type="button"
+      type={type}
       isPrimary={isPrimary}
+      disabled={isDisabled}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >

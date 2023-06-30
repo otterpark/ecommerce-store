@@ -5,11 +5,7 @@ export const maxWidth = {
 
 /**
  *
-  xs: 1.3rem
-  s: 1.4rem
-  default: 1.6rem
-  m: 2.4rem
-  l: 2.8rem
+  xs: 1.3rem, s: 1.4rem, default: 1.6rem, m: 2.4rem, l: 2.8rem
 */
 export const fontSize = {
   xs: '1.3rem',
@@ -21,14 +17,18 @@ export const fontSize = {
 
 /**
  *
-  xs: 1.2rem
-  s: 2.4rem
-  m: 3.6rem
+  xs: 1.2rem, s: 2.4rem, m: 3.6rem, l: 4.8rem
 */
 export const space = {
   xs: '1.2rem',
   s: '2.4rem',
   m: '3.6rem',
+  l: '4.8rem',
+};
+
+export const borderRidius = {
+  defalut: '.8rem',
+  full: '50%',
 };
 
 export const interval = {

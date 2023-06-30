@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useWindowSize from '@/hooks/useWindowResize';
 
 import { breakpoints, size } from '@/styles/medias';
+import { borderRidius } from '@/styles/sizes';
 import Menu from './Menu';
 
 type ToggleProps = {
@@ -30,7 +31,7 @@ const StyledBurger = styled.button<ToggleProps>`
     width: 2rem;
     height: 0.25rem;
     background: #0D0C1D;
-    border-radius: 10px;
+    border-radius: ${borderRidius.defalut};
     transition: all 0.3s linear;
     position: relative;
     transform-origin: 1px;
