@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useRef } from 'react';
+import { InputHTMLAttributes, useId } from 'react';
 import styled from 'styled-components';
 
 import { BaseBoxPadding } from '@/styles/commonStyle';
@@ -31,16 +31,16 @@ export default function InputText({
   label,
   ...props
 }: InputTextProps) {
-  const id = useRef(`input-${Math.random().toString(36).substring(2, 11)}`);
+  const id = useId();
 
   return (
     <>
-      <Label htmlFor={id.current}>
+      <Label htmlFor={id}>
         {label}
       </Label>
       <Input
         type={type}
-        id={id.current}
+        id={id}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
