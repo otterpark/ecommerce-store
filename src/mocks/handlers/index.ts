@@ -1,7 +1,7 @@
-import getTests from './testMock';
+import user from './user';
 
 const handlers = [
-  ...Object.values(getTests),
+  ...Object.values(user),
 ];
 
 export default handlers;
