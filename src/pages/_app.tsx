@@ -1,11 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import type { AppProps } from 'next/app';
 
+import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Reset } from 'styled-reset';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import Footer from '@/components/organisms/Footer';
-import Header from '@/components/organisms/Header';
+import { persistor, store } from '@/features';
+
+import ModalAlert from '@/components/organisms/modal/ModalAlert';
+import { Header, Footer } from '@/components/organisms';
 
 import defaultTheme from '../styles/defaultTheme';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -14,14 +18,19 @@ export default function App({ Component, pageProps }: AppProps) {
   const theme = defaultTheme;
   return (
     <ThemeProvider theme={theme}>
-      <Reset />
-      <GlobalStyle />
-      <Header />
-      <Component
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...pageProps}
-      />
-      <Footer />
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Reset />
+          <GlobalStyle />
+          <Header />
+          <Component
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...pageProps}
+          />
+          <Footer />
+          <ModalAlert />
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   );
 }

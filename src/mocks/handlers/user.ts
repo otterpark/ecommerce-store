@@ -1,16 +1,35 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
 
-import { LOGIN, USER_INFO } from '@/api/url';
+import { LOGIN, SIGNUP, USER_INFO } from '@/api/url';
 
 import { mockUserAccessToken, mockUserInfo } from '@/fixtures/__mocks__/api';
 
 export const postLogin = (type?: 'Error') => rest.post(LOGIN, (req, res, ctx) => {
   if (type) {
-    return res(ctx.status(400));
+    return res(
+      ctx.delay(),
+      ctx.status(400),
+    );
   }
 
   return res(
+    ctx.delay(),
+    ctx.status(201),
+    ctx.json(mockUserAccessToken),
+  );
+});
+
+export const postSignup = (type?: 'Error') => rest.post(SIGNUP, (req, res, ctx) => {
+  if (type) {
+    return res(
+      ctx.delay(),
+      ctx.status(400),
+    );
+  }
+
+  return res(
+    ctx.delay(),
     ctx.status(201),
     ctx.json(mockUserAccessToken),
   );
@@ -22,9 +41,10 @@ export const getUserInfo = (type?: 'Error') => rest.get(USER_INFO, (req, res, ct
   }
 
   return res(
+    ctx.delay(),
     ctx.status(200),
     ctx.json(mockUserInfo),
   );
 });
 
-export default [postLogin(), getUserInfo()];
+export default [postLogin(), postSignup(), getUserInfo()];

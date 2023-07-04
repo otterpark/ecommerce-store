@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@/utils/tests/wrapThemeProvider';
+import { render, screen } from '@/utils/tests/renderWithTheme';
 import InputText from './InputText';
 
 const context = describe;

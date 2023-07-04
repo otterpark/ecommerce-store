@@ -43,7 +43,7 @@ export default function LoadingSpinner({
   color = defaultTheme.colors.primary,
 } : LoadingSpinnerProps) {
   return (
-    <LoadingSpinnerBox>
+    <LoadingSpinnerBox data-testid="loading">
       <Spinner color={color} />
     </LoadingSpinnerBox>
   );

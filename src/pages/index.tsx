@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Header from '@/components/organisms/Header';
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import PageWrap from '@/components/atoms/wrap/PageWrap';
 import { maxWidth } from '@/styles/sizes';

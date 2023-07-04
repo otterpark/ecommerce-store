@@ -1,4 +1,4 @@
-import { render, screen } from '@/utils/tests/wrapThemeProvider';
+import { render, screen } from '@/utils/tests/renderWithTheme';
 import Home from '.';
 
 describe('HomePage ', () => {

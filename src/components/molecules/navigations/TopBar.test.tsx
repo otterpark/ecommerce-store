@@ -1,4 +1,4 @@
-import { render, screen } from '@/utils/tests/wrapThemeProvider';
+import { render, screen } from '@/utils/tests/renderWithTheme';
 import TopBar from './TopBar';
 
 describe('TopBar', () => {

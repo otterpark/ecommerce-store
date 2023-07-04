@@ -1,4 +1,4 @@
-import { fontSize, space } from '@/styles/sizes';
+import { fontSize } from '@/styles/sizes';
 import styled from 'styled-components';
 
 type PageTitleProps = {

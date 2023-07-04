@@ -4,7 +4,7 @@ import { ReactNode, ButtonHTMLAttributes } from 'react';
 import { BaseBoxPadding } from '@/styles/commonStyle';
 import { borderRadius, fontSize } from '@/styles/sizes';
 
-type BorderRadius = `${number} ${number} ${number} ${number}` | `${number}`;
+type BorderRadius = `${string | number} ${string | number} ${string | number} ${string | number}` | `${number}`;
 
 type ButtonProps = {
   type?: 'button' | 'submit',
