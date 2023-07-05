@@ -1,9 +1,15 @@
 import Link from 'next/link';
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
+
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 
 import { BaseBoxPadding } from '@/styles/commonStyle';
 import { maxWidth } from '@/styles/sizes';
+
+import { useAppSelector } from '@/hooks/useReduxWithType';
+
+import useUserService from '@/services/userService';
 
 const TopBarWrap = styled.div`
   ${BaseBoxPadding}
@@ -26,19 +32,42 @@ const TopBarUl = styled.ul`
   }
 `;
 export default function TopBar() {
+  const auth = useAppSelector((state) => state.auth);
+  const { logout } = useUserService();
+
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    logout();
+  };
+
   return (
-    // TODO: 링크 수정
     <TopBarWrap>
       <MaxWidthWrap
         maxWidth={maxWidth.full}
       >
         <TopBarUl>
-          <li>
-            <Link href="/login">로그인</Link>
-          </li>
-          <li>
-            <Link href="/signup">회원가입</Link>
-          </li>
+          {(!auth.isAuthenticated)
+            ? (
+              <>
+                <li>
+                  <Link href="/login">로그인</Link>
+                </li>
+                <li>
+                  <Link href="/signup">회원가입</Link>
+                </li>
+              </>
+            )
+            : (
+              <>
+                <li>
+                  {auth.userInfo.name}
+                  님 환영합니다.
+                </li>
+                <li>
+                  <a href="#none" onClick={handleClick}>로그아웃</a>
+                </li>
+              </>
+            )}
         </TopBarUl>
       </MaxWidthWrap>
     </TopBarWrap>

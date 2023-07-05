@@ -1,11 +1,13 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
 
-import { LOGIN, SIGNUP, USER_INFO } from '@/api/url';
+import {
+  LOGIN, LOGOUT, SIGNUP, USER_INFO,
+} from '@/api/url';
 
 import { mockUserAccessToken, mockUserInfo } from '@/fixtures/__mocks__/api';
 
-export const postLogin = (type?: 'Error') => rest.post(LOGIN, (req, res, ctx) => {
+export const login = (type?: 'Error') => rest.post(LOGIN, (req, res, ctx) => {
   if (type) {
     return res(
       ctx.delay(),
@@ -20,7 +22,12 @@ export const postLogin = (type?: 'Error') => rest.post(LOGIN, (req, res, ctx) =>
   );
 });
 
-export const postSignup = (type?: 'Error') => rest.post(SIGNUP, (req, res, ctx) => {
+export const logout = () => rest.post(LOGOUT, (req, res, ctx) => res(
+  ctx.delay(),
+  ctx.status(200),
+));
+
+export const signup = (type?: 'Error') => rest.post(SIGNUP, (req, res, ctx) => {
   if (type) {
     return res(
       ctx.delay(),
@@ -47,4 +54,4 @@ export const getUserInfo = (type?: 'Error') => rest.get(USER_INFO, (req, res, ct
   );
 });
 
-export default [postLogin(), postSignup(), getUserInfo()];
+export default [login(), logout(), signup(), getUserInfo()];

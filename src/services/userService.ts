@@ -3,7 +3,9 @@ import { api } from '@/api/call';
 import {
   GetUserInfoResponse, LoginRequest, LoginResponse, SignupRequest, SignupResponse,
 } from '@/api/types/user';
-import { LOGIN, SIGNUP, USER_INFO } from '@/api/url';
+import {
+  LOGIN, LOGOUT, SIGNUP, USER_INFO,
+} from '@/api/url';
 
 import { clearAuth, setAuth, setUserInfo } from '@/features';
 
@@ -32,8 +34,26 @@ const useUserService = () => {
           onSuccess && onSuccess();
         },
       )
-      .catch((error) => {
-        clearAuth();
+      .catch(() => {
+        dispatch(clearAuth());
+        onError && onError();
+      });
+  };
+
+  const logout = (
+    onSuccess?: () => void,
+    onError?: () => void,
+  ) => {
+    api.delete<any, any>(
+      LOGOUT,
+    )
+      .then(
+        () => {
+          dispatch(clearAuth());
+          onSuccess && onSuccess();
+        },
+      )
+      .catch(() => {
         onError && onError();
       });
   };
@@ -58,8 +78,8 @@ const useUserService = () => {
           onSuccess && onSuccess();
         },
       )
-      .catch((error) => {
-        clearAuth();
+      .catch(() => {
+        dispatch(clearAuth());
         onError && onError();
       });
   };
@@ -82,13 +102,15 @@ const useUserService = () => {
           onSuccess && onSuccess();
         },
       )
-      .catch((error) => {
-        clearAuth();
+      .catch(() => {
+        dispatch(clearAuth());
         onError && onError();
       });
   };
 
-  return { login, signup, getUser };
+  return {
+    login, logout, signup, getUser,
+  };
 };
 
 export default useUserService;
