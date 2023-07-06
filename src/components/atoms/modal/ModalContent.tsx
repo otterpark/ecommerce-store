@@ -12,6 +12,7 @@ const Content = styled.p`
   justify-content: center;
   align-items: center;
   white-space: pre-line;
+  word-break: keep-all;
 `;
 
 type ModalContentProps = {

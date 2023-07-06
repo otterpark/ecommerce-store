@@ -59,17 +59,13 @@ export default function LoginForm() {
             router.push('/');
           },
           () => {
-            showAlert({
-              message: ERROR_MESSAGE.USER.INVALED_TOKEN,
-            });
+            showAlert(ERROR_MESSAGE.USER.INVALED_TOKEN);
             setIsLoading(false);
           },
         );
       },
       () => {
-        showAlert({
-          message: ERROR_MESSAGE.USER.INVALED_USER,
-        });
+        showAlert(ERROR_MESSAGE.USER.INVALED_USER);
         setIsLoading(false);
       },
     );

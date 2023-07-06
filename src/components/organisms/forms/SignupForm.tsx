@@ -82,17 +82,13 @@ export default function SignupForm() {
             router.push('/');
           },
           () => {
-            showAlert({
-              message: ERROR_MESSAGE.USER.INVALED_TOKEN,
-            });
+            showAlert(ERROR_MESSAGE.USER.INVALED_TOKEN);
             setIsLoading(false);
           },
         );
       },
       () => {
-        showAlert({
-          message: ERROR_MESSAGE.USER.INVALED_SIGNUP,
-        });
+        showAlert(ERROR_MESSAGE.USER.INVALED_SIGNUP);
         setIsLoading(false);
       },
     );

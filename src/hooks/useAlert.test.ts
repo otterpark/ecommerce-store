@@ -11,7 +11,7 @@ describe('useAlert', () => {
   context('when hook method', () => {
     it('use showAlert method', () => {
       const { showAlert } = useAlert();
-      showAlert({ message: 'test' });
+      showAlert('test');
 
       expect(mockUseDispatch).toBeCalledTimes(1);
     });

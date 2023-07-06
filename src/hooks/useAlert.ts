@@ -1,5 +1,5 @@
 import {
-  Modal, closeModal, openModal,
+  closeModal, openModal,
 } from '@/features';
 import { useAppSelector, useAppDispatch } from './useReduxWithType';
 
@@ -7,8 +7,7 @@ export default function useAlert() {
   const dispatch = useAppDispatch();
   const alert = useAppSelector((state) => state.modal);
 
-  type showAlertProps = Pick<Modal, 'message'>
-  const showAlert = ({ message }: showAlertProps) => {
+  const showAlert = (message: string) => {
     dispatch(openModal({
       message,
     }));
