@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { AppProps } from 'next/app';
 
+import { StrictMode } from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
@@ -17,20 +18,22 @@ import GlobalStyle from '../styles/GlobalStyle';
 export default function App({ Component, pageProps }: AppProps) {
   const theme = defaultTheme;
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Reset />
-          <GlobalStyle />
-          <Header />
-          <Component
+    <StrictMode>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Reset />
+            <GlobalStyle />
+            <Header />
+            <Component
             // eslint-disable-next-line react/jsx-props-no-spreading
-            {...pageProps}
-          />
-          <Footer />
-          <ModalAlert />
-        </PersistGate>
-      </Provider>
-    </ThemeProvider>
+              {...pageProps}
+            />
+            <Footer />
+            <ModalAlert />
+          </PersistGate>
+        </Provider>
+      </ThemeProvider>
+    </StrictMode>
   );
 }
