@@ -4,10 +4,11 @@ import {
 import userEvent from '@testing-library/user-event';
 
 import server from '@/mocks/server';
-import { getUserInfo, postLogin } from '@/mocks/handlers/user';
+import { getUserInfo, login } from '@/mocks/handlers/user';
+
+import { mockPush } from '@/fixtures/__mocks__/jest/nextRouter';
 
 import ModalAlert from '@/components/organisms/modal/ModalAlert';
-import { mockPush } from '@/fixtures/__mocks__/jest/nextRouter';
 import LoginPage from '.';
 
 jest.unmock('react-redux');
@@ -21,6 +22,7 @@ describe('LoginPage ', () => {
         <LoginPage />
         <ModalAlert />
       </>,
+
     );
     return store;
   };
@@ -95,7 +97,7 @@ describe('LoginPage ', () => {
 
   context('when user login fail', () => {
     it('login fail with wrong email, password', async () => {
-      server.use(postLogin('Error'));
+      server.use(login('Error'));
       renderLoginPage();
 
       const email = screen.getByPlaceholderText(/이메일/);

@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import LoginForm from '@/components/organisms/forms/LoginForm';
 import PageWrap from '@/components/atoms/wrap/PageWrap';
+import withAccessPermission from '@/components/hocs/withAccessPermission';
 
 import { maxWidth } from '@/styles/sizes';
 
 const Container = styled.div``;
 
-export default function LoginPage() {
+function LoginPage() {
   return (
     <Container>
       <PageWrap>
@@ -19,3 +20,5 @@ export default function LoginPage() {
     </Container>
   );
 }
+
+export default withAccessPermission(LoginPage, 'public');

@@ -4,7 +4,7 @@ import ModalAlert from '@/components/organisms/modal/ModalAlert';
 import userEvent from '@testing-library/user-event';
 import { mockPush } from '@/fixtures/__mocks__/jest/nextRouter';
 import server from '@/mocks/server';
-import { postSignup } from '@/mocks/handlers/user';
+import { signup } from '@/mocks/handlers/user';
 import SignupPage from '.';
 
 const context = describe;
@@ -96,7 +96,7 @@ describe('Signup ', () => {
 
   context('when user signup fail', () => {
     it('signup fail with duplicate email', async () => {
-      server.use(postSignup('Error'));
+      server.use(signup('Error'));
       renderSignupPage();
 
       const email = screen.getByPlaceholderText(/이메일/);
