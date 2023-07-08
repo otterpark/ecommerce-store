@@ -10,7 +10,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from '@/features';
 
 import ModalAlert from '@/components/organisms/modal/ModalAlert';
-import { Header, Footer } from '@/components/organisms';
 
 import defaultTheme from '../styles/defaultTheme';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -24,12 +23,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <PersistGate loading={null} persistor={persistor}>
             <Reset />
             <GlobalStyle />
-            <Header />
             <Component
             // eslint-disable-next-line react/jsx-props-no-spreading
               {...pageProps}
             />
-            <Footer />
             <ModalAlert />
           </PersistGate>
         </Provider>

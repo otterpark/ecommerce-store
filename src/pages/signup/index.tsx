@@ -6,6 +6,7 @@ import SignupForm from '@/components/organisms/forms/SignupForm';
 import withAccessPermission from '@/components/hocs/withAccessPermission';
 
 import { maxWidth } from '@/styles/sizes';
+import { Header, Footer } from '@/components/organisms';
 
 const Container = styled.div`
 
@@ -14,6 +15,7 @@ const Container = styled.div`
 function SignupPage() {
   return (
     <Container>
+      <Header />
       <PageWrap>
         <MaxWidthWrap
           maxWidth={maxWidth.middle}
@@ -21,6 +23,7 @@ function SignupPage() {
           <SignupForm />
         </MaxWidthWrap>
       </PageWrap>
+      <Footer />
     </Container>
   );
 }
