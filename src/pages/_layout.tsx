@@ -1,25 +1,19 @@
-// eslint-disable-next-line @next/next/no-document-import-in-page
-import Document, { DocumentContext } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import { ReactNode } from 'react';
 
-export default class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const sheet = new ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
+import { Footer, Header } from '@/components/organisms';
 
-    try {
-      ctx.renderPage = () => originalRenderPage({
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
-      });
+type LayoutProps = {
+  children: ReactNode;
+}
 
-      const initialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initialProps,
-        styles: [initialProps.styles, sheet.getStyleElement()],
-      };
-    } finally {
-      sheet.seal();
-    }
-  }
+export default function Layout({ children }: LayoutProps) {
+  return (
+    <>
+      <Header />
+      <main>
+        {children}
+      </main>
+      <Footer />
+    </>
+  );
 }
