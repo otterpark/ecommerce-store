@@ -1,15 +1,28 @@
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import { breakpoints } from '@/styles/medias';
+import { space } from '@/styles/sizes';
+
+import useProduct from '@/hooks/useProduct';
 
 type MenuProps = {
   isToggled: boolean;
 }
 
 const StyledMenu = styled.ul<MenuProps>`
+  display: flex;
+  flex-direction: columns;
+  align-items: center;
   margin-left: 3.2rem;
+  gap: ${space.m};
   li {
-    padding: 1.6rem 0;
+    a {
+      display: inline-block;
+      height: 100%;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
   }
   ${breakpoints.tablet} {
     position: absolute;
@@ -30,11 +43,19 @@ const StyledMenu = styled.ul<MenuProps>`
 export default function Menu({
   isToggled,
 }: MenuProps) {
+  const { categories } = useProduct();
+
   return (
     <StyledMenu
       isToggled={isToggled}
     >
-      <li>Products</li>
+      {categories.data?.map((category) => (
+        <li key={category.id}>
+          <Link href={`/${category.id}`}>
+            {category.name}
+          </Link>
+        </li>
+      ))}
     </StyledMenu>
   );
 }
