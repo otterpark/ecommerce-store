@@ -6,8 +6,7 @@ import PageWrap from '@/components/atoms/wrap/PageWrap';
 
 import { maxWidth } from '@/styles/sizes';
 
-import useProduct from '@/hooks/useProduct';
-
+import ProductsList from '@/components/molecules/products/list/ProductsList';
 import Layout from './_layout';
 
 const HomeContainer = styled.div``;
@@ -19,7 +18,7 @@ function HomePage() {
         <MaxWidthWrap
           maxWidth={maxWidth.full}
         >
-          Hello World!
+          <ProductsList />
         </MaxWidthWrap>
       </PageWrap>
     </HomeContainer>

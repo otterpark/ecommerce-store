@@ -6,3 +6,4 @@ export const USER_INFO = '/users/me';
 
 // Product
 export const GET_CATEGORIES = '/categories';
+export const GET_PRODUCTS = '/products';

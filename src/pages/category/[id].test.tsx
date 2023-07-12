@@ -3,22 +3,22 @@ import { render, screen, waitFor } from '@/utils/tests/renderWithSWR';
 import server from '@/mocks/server';
 import { getProducts } from '@/mocks/handlers/product';
 
-import HomePage from '.';
+import CategoryPage from './[id]';
 
 const context = describe;
 
-describe('HomePage ', () => {
-  const renderHomepage = () => render(<HomePage />);
+describe('CategoryPage ', () => {
+  const renderHomepage = () => render(<CategoryPage />);
 
-  context('when render Hompage', () => {
+  context('when render CategoryPage', () => {
     it('can see all categories products', async () => {
+      server.use(getProducts('HasCategory'));
       renderHomepage();
 
       await waitFor(() => {
         expect(screen.getByText(/하트자수맨투맨/)).toBeInTheDocument();
-        expect(screen.getByText(/박시롱코트/)).toBeInTheDocument();
-        expect(screen.getByText(/하트자수셋업조거/)).toBeInTheDocument();
-        expect(screen.getByText(/EARRING Purple/)).toBeInTheDocument();
+        expect(screen.getByText(/사틴셔츠/)).toBeInTheDocument();
+        expect(screen.getByText(/레이어드 탑/)).toBeInTheDocument();
       });
     });
   });
