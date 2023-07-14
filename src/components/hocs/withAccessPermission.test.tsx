@@ -1,6 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { render, screen, waitFor } from '@/utils/tests/renderWithProvider';
 
-import { mockPush } from '@/fixtures/__mocks__/jest/nextRouter';
+import mockRouter from 'next-router-mock';
 
 import HomePage from '@/pages';
 import ModalAlert from '../organisms/modal/ModalAlert';
@@ -11,10 +12,6 @@ const context = describe;
 jest.unmock('react-redux');
 
 describe('withAccessPermission', () => {
-  beforeEach(() => {
-    mockPush.mockClear();
-  });
-
   context('when render hoc withAccessPermission with type auth', () => {
     const HomePageWithAuthComponent = withAuth(HomePage, 'auth');
 
@@ -28,11 +25,15 @@ describe('withAccessPermission', () => {
 
       await waitFor(() => {
         expect(screen.getByText(/접근 권한이 없거나 잘못된 접근입니다./)).toBeInTheDocument();
-        expect(mockPush).toBeCalledTimes(1);
+        expect(mockRouter).toMatchObject({
+          asPath: '/',
+          pathname: '/',
+          query: {},
+        });
       });
     });
 
-    it('if isAuthenticated is true can access page', () => {
+    it('if isAuthenticated is true can access page', async () => {
       render(
         <>
           <HomePageWithAuthComponent />
@@ -49,7 +50,12 @@ describe('withAccessPermission', () => {
         },
       );
 
-      expect(screen.getByText(/Hello World!/)).toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.getByText(/하트자수맨투맨/)).toBeInTheDocument();
+        expect(screen.getByText(/박시롱코트/)).toBeInTheDocument();
+        expect(screen.getByText(/하트자수셋업조거/)).toBeInTheDocument();
+        expect(screen.getByText(/EARRING Purple/)).toBeInTheDocument();
+      });
     });
   });
 
@@ -75,11 +81,15 @@ describe('withAccessPermission', () => {
 
       await waitFor(() => {
         expect(screen.getByText(/접근 권한이 없거나 잘못된 접근입니다./)).toBeInTheDocument();
-        expect(mockPush).toBeCalledTimes(1);
+        expect(mockRouter).toMatchObject({
+          asPath: '/',
+          pathname: '/',
+          query: {},
+        });
       });
     });
 
-    it('if isAuthenticated is false can access page', () => {
+    it('if isAuthenticated is false can access page', async () => {
       render(
         <>
           <HomePageWithAuthComponent />
@@ -87,7 +97,12 @@ describe('withAccessPermission', () => {
         </>,
       );
 
-      expect(screen.getByText(/Hello World!/)).toBeInTheDocument();
+      await waitFor(() => {
+        expect(screen.getByText(/하트자수맨투맨/)).toBeInTheDocument();
+        expect(screen.getByText(/박시롱코트/)).toBeInTheDocument();
+        expect(screen.getByText(/하트자수셋업조거/)).toBeInTheDocument();
+        expect(screen.getByText(/EARRING Purple/)).toBeInTheDocument();
+      });
     });
   });
 });

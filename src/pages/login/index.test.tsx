@@ -3,10 +3,11 @@ import {
 } from '@/utils/tests/renderWithProvider';
 import userEvent from '@testing-library/user-event';
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+import mockRouter from 'next-router-mock';
+
 import server from '@/mocks/server';
 import { getUserInfo, login } from '@/mocks/handlers/user';
-
-import { mockPush } from '@/fixtures/__mocks__/jest/nextRouter';
 
 import ModalAlert from '@/components/organisms/modal/ModalAlert';
 import LoginPage from '.';
@@ -26,10 +27,6 @@ describe('LoginPage ', () => {
     );
     return store;
   };
-
-  beforeEach(() => {
-    mockPush.mockClear();
-  });
 
   it('render page', () => {
     renderLoginPage();
@@ -64,7 +61,11 @@ describe('LoginPage ', () => {
       expect(store.getState().auth.userInfo.id).toBe('userId');
       expect(store.getState().auth.userInfo.name).toBe('진우팍');
 
-      expect(mockPush).toBeCalledTimes(1);
+      expect(mockRouter).toMatchObject({
+        asPath: '/',
+        pathname: '/',
+        query: {},
+      });
     });
 
     it('login submit button click', async () => {
@@ -91,7 +92,11 @@ describe('LoginPage ', () => {
       expect(store.getState().auth.userInfo.id).toBe('userId');
       expect(store.getState().auth.userInfo.name).toBe('진우팍');
 
-      expect(mockPush).toBeCalledTimes(1);
+      expect(mockRouter).toMatchObject({
+        asPath: '/',
+        pathname: '/',
+        query: {},
+      });
     });
   });
 

@@ -1,10 +1,13 @@
 import { render, screen, waitForElementToBeRemoved } from '@/utils/tests/renderWithProvider';
-
-import ModalAlert from '@/components/organisms/modal/ModalAlert';
 import userEvent from '@testing-library/user-event';
-import { mockPush } from '@/fixtures/__mocks__/jest/nextRouter';
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+import mockRouter from 'next-router-mock';
+
 import server from '@/mocks/server';
 import { signup } from '@/mocks/handlers/user';
+
+import ModalAlert from '@/components/organisms/modal/ModalAlert';
 import SignupPage from '.';
 
 const context = describe;
@@ -20,10 +23,6 @@ describe('Signup ', () => {
       </>,
     );
   };
-
-  beforeEach(() => {
-    mockPush.mockClear();
-  });
 
   it('render page', () => {
     renderSignupPage();
@@ -61,7 +60,11 @@ describe('Signup ', () => {
 
       await waitForElementToBeRemoved(() => screen.getByTestId('loading'));
 
-      expect(mockPush).toBeCalledTimes(1);
+      expect(mockRouter).toMatchObject({
+        asPath: '/',
+        pathname: '/',
+        query: {},
+      });
     });
 
     it('signup submit button click', async () => {
@@ -90,7 +93,11 @@ describe('Signup ', () => {
 
       await waitForElementToBeRemoved(() => screen.getByTestId('loading'));
 
-      expect(mockPush).toBeCalledTimes(1);
+      expect(mockRouter).toMatchObject({
+        asPath: '/',
+        pathname: '/',
+        query: {},
+      });
     });
   });
 

@@ -1,20 +1,29 @@
-// eslint-disable-next-line import/prefer-default-export
-export const mockPush = jest.fn();
+/* eslint-disable import/no-extraneous-dependencies */
+import mockRouter from 'next-router-mock';
+import * as nextRouterMock from 'next-router-mock';
 
-jest.mock('next/router', () => ({
-  useRouter() {
-    return ({
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: '',
-      push: mockPush,
-      events: {
-        on: jest.fn(),
-        off: jest.fn(),
-      },
-      beforePopState: jest.fn(() => null),
-      prefetch: jest.fn(() => null),
-    });
-  },
-}));
+import { createDynamicRouteParser } from 'next-router-mock/dynamic-routes';
+
+jest.mock('next/router', () => nextRouterMock);
+
+// jest.mock('next/router', () => ({
+//   useRouter() {
+//     return ({
+//       route: '/',
+//       pathname: '',
+//       query: '',
+//       asPath: '',
+//       push: mockPush,
+//       events: {
+//         on: jest.fn(),
+//         off: jest.fn(),
+//       },
+//       beforePopState: jest.fn(() => null),
+//       prefetch: jest.fn(() => null),
+//     });
+//   },
+// }));
+
+mockRouter.useParser(createDynamicRouteParser([
+  '/products/[id]',
+]));

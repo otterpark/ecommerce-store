@@ -6,13 +6,15 @@ import useAlert from '@/hooks/useAlert';
 import useAuth from '@/hooks/useAuth';
 
 import { ERROR_MESSAGE } from '@/constants';
+import { NextPageWithLayout } from '@/pages/_app';
 
 export default function withAccessPermission<P extends object>(
-  WrappedComponent: FunctionComponent<P>,
+  WrappedComponent: FunctionComponent<P> & NextPageWithLayout,
   access: 'auth' | 'public',
 ) {
   // eslint-disable-next-line func-names, react/display-name, react/function-component-definition
   return (props: P) => {
+    const getLayout = WrappedComponent.getLayout ?? ((page) => page);
     const router = useRouter();
     const { auth } = useAuth();
     const { showAlert } = useAlert();
@@ -41,6 +43,6 @@ export default function withAccessPermission<P extends object>(
     }, []);
 
     // eslint-disable-next-line react/jsx-props-no-spreading
-    return <WrappedComponent {...props} />;
+    return getLayout(<WrappedComponent {...props} />);
   };
 }
