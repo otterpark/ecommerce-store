@@ -44,7 +44,7 @@ const useUserService = () => {
     onSuccess?: () => void,
     onError?: () => void,
   ) => {
-    api.delete<any, any>(
+    api.delete(
       LOGOUT,
     )
       .then(

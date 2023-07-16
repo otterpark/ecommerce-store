@@ -13,9 +13,6 @@ import { breakpoints } from '@/styles/medias';
 import { borderRadius, fontSize, space } from '@/styles/sizes';
 
 import { ERROR_MESSAGE } from '@/constants';
-import { GET_PRODUCTS } from '@/api/url';
-import { mutate } from 'swr';
-import { useEffect } from 'react';
 
 const ProductList = styled.ul`
   display: grid;
