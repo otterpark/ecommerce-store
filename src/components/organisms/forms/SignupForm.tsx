@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import LoadingSpinner from '@/components/atoms/Loading';
 import Button from '@/components/atoms/buttons/Button';
-import PageTitle from '@/components/atoms/titles/PageTitle';
+import PageTitle from '@/components/atoms/texts/PageTitle';
 import InputText from '@/components/molecules/inputs/InputText';
 
 import { ButtonWrap, InputWrap } from '@/styles/commonStyle';

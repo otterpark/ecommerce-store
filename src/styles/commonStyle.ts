@@ -1,9 +1,5 @@
 import styled, { css } from 'styled-components';
-import { interval, space } from './sizes';
-
-export const BaseBoxPadding = css`
-  padding: ${interval.content.paddingHorizontal} ${interval.content.paddingVertical};
-`;
+import { space } from './sizes';
 
 export const FlexColumn = css`
   display: flex;

@@ -4,15 +4,14 @@ import styled from 'styled-components';
 
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 
-import { BaseBoxPadding } from '@/styles/commonStyle';
-import { maxWidth } from '@/styles/sizes';
+import { maxWidth, space } from '@/styles/sizes';
 
 import { useAppSelector } from '@/hooks/useReduxWithType';
 
 import useUserService from '@/services/userService';
 
 const TopBarWrap = styled.div`
-  ${BaseBoxPadding}
+  padding: ${space.xs} ${space.s};
   background-color: ${(props) => props.theme.colors.backgroundSecondary};
 `;
 

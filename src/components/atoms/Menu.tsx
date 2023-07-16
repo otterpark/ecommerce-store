@@ -5,12 +5,16 @@ import { breakpoints } from '@/styles/medias';
 import { space } from '@/styles/sizes';
 
 import useProduct from '@/hooks/useProduct';
+import { useRouter } from 'next/router';
 
 type MenuProps = {
   isToggled: boolean;
+  setIsToggled: (isToggled: boolean) => void;
 }
 
-const StyledMenu = styled.ul<MenuProps>`
+type StyledMenuProps = Pick<MenuProps, 'isToggled'>
+
+const StyledMenu = styled.ul<StyledMenuProps>`
   display: flex;
   flex-direction: columns;
   align-items: center;
@@ -34,6 +38,8 @@ const StyledMenu = styled.ul<MenuProps>`
     background: white;
     z-index: ${(props) => (props.isToggled ? '1' : '-1')};
     opacity: ${(props) => (props.isToggled ? '1' : '0')};
+    flex-direction: column;
+    padding: ${space.s};
     li {
       padding: 1.6rem 2.4rem;
     }
@@ -41,21 +47,31 @@ const StyledMenu = styled.ul<MenuProps>`
 `;
 
 export default function Menu({
-  isToggled,
+  isToggled, setIsToggled,
 }: MenuProps) {
+  const router = useRouter();
   const { categories } = useProduct();
+
+  const handleClick = (url: string, event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    setIsToggled(!isToggled);
+    router.push(url);
+  };
 
   return (
     <StyledMenu
       isToggled={isToggled}
     >
-      {categories.data?.map((category) => (
-        <li key={category.id}>
-          <Link href={`/${category.id}`}>
-            {category.name}
-          </Link>
-        </li>
-      ))}
+      {categories.data?.map((category) => {
+        const url = `/category/${category.id}`;
+        return (
+          <li key={category.id}>
+            <Link href={url} onClick={(event) => handleClick(url, event)}>
+              {category.name}
+            </Link>
+          </li>
+        );
+      })}
     </StyledMenu>
   );
 }

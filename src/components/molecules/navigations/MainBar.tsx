@@ -4,12 +4,11 @@ import Logo from '@/components/atoms/Logo';
 import Nav from '@/components/atoms/Nav';
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 
-import { BaseBoxPadding } from '@/styles/commonStyle';
 import { breakpoints } from '@/styles/medias';
-import { maxWidth } from '@/styles/sizes';
+import { maxWidth, space } from '@/styles/sizes';
 
 const MainBarWrap = styled.div`
-  ${BaseBoxPadding}
+  padding: ${space.xs} ${space.s};
 `;
 
 const MainBarDiv = styled.div`

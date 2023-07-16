@@ -67,7 +67,7 @@ export default function Nav() {
 
   return (
     <>
-      <Menu isToggled={isToggled} />
+      <Menu isToggled={isToggled} setIsToggled={setIsToggled} />
       <StyledBurger
         isToggled={isToggled}
         onClick={() => setIsToggled(!isToggled)}
