@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { ReactNode, ButtonHTMLAttributes } from 'react';
 
-import { BaseBoxPadding } from '@/styles/commonStyle';
-import { borderRadius, fontSize } from '@/styles/sizes';
+import { borderRadius, fontSize, space } from '@/styles/sizes';
 
 type BorderRadius = `${string | number} ${string | number} ${string | number} ${string | number}` | `${number}`;
 
@@ -18,7 +17,7 @@ type ButtonProps = {
 const DefaultButton = styled.button<ButtonProps>`
   background: ${(props) => (props.isPrimary ? props.theme.colors.primary : 'white')};
   color: ${(props) => (props.isPrimary ? 'white' : props.theme.colors.text)};
-  ${BaseBoxPadding};
+  padding: ${space.xs} ${space.xs};
   height: ${(props) => props.height}px;
   width: 100%;
   border: 1px solid ${(props) => (props.isPrimary ? props.theme.colors.primary : props.theme.colors.border)};
