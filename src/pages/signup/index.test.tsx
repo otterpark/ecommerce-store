@@ -8,7 +8,7 @@ import server from '@/mocks/server';
 import { signup } from '@/mocks/handlers/user';
 
 import ModalAlert from '@/components/organisms/modal/ModalAlert';
-import SignupPage from '.';
+import SignupPage from './index.page';
 
 const context = describe;
 

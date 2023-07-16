@@ -10,7 +10,7 @@ import server from '@/mocks/server';
 import { getUserInfo, login } from '@/mocks/handlers/user';
 
 import ModalAlert from '@/components/organisms/modal/ModalAlert';
-import LoginPage from '.';
+import LoginPage from './index.page';
 
 jest.unmock('react-redux');
 

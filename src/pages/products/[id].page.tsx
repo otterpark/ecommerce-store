@@ -7,7 +7,7 @@ import ProductDetail from '@/components/organisms/products/ProductDetail';
 
 import { maxWidth } from '@/styles/sizes';
 
-import Layout from '../_layout';
+import Layout from '../layout';
 
 function ProductsDetailPage() {
   const { id } = useRouter().query;

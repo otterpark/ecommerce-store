@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@/utils/tests/renderWithSWR';
 import server from '@/mocks/server';
 import { getProducts } from '@/mocks/handlers/product';
 
-import HomePage from '.';
+import HomePage from './index.page';
 
 const context = describe;
 

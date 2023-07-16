@@ -9,7 +9,7 @@ import { maxWidth } from '@/styles/sizes';
 
 import { useRouter } from 'next/router';
 
-import Layout from '../_layout';
+import Layout from '../layout';
 
 const HomeContainer = styled.div``;
 

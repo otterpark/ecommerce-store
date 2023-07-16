@@ -6,7 +6,7 @@ import mockRouter from 'next-router-mock';
 import server from '@/mocks/server';
 import { getProducts } from '@/mocks/handlers/product';
 
-import CategoryPage from './[id]';
+import CategoryPage from './[id].page';
 
 const context = describe;
 

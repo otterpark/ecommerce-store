@@ -8,7 +8,7 @@ import withAccessPermission from '@/components/hocs/withAccessPermission';
 
 import { maxWidth } from '@/styles/sizes';
 
-import Layout from '../_layout';
+import Layout from '../layout';
 
 const Container = styled.div``;
 

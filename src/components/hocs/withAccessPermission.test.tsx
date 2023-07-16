@@ -3,7 +3,7 @@ import { render, screen, waitFor } from '@/utils/tests/renderWithProvider';
 
 import mockRouter from 'next-router-mock';
 
-import HomePage from '@/pages';
+import HomePage from '@/pages/index.page';
 import ModalAlert from '../organisms/modal/ModalAlert';
 import withAuth from './withAccessPermission';
 

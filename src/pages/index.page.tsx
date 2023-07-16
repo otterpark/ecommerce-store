@@ -7,7 +7,7 @@ import PageWrap from '@/components/atoms/wrap/PageWrap';
 import { maxWidth } from '@/styles/sizes';
 
 import ProductsList from '@/components/molecules/products/list/ProductsList';
-import Layout from './_layout';
+import Layout from './layout';
 
 const HomeContainer = styled.div``;
 
