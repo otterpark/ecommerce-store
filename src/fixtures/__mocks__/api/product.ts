@@ -47,3 +47,57 @@ export const mockProducts: Products = {
       id: '0BV000PRO0012', category: { id: '0BV000CAT0004', name: 'acc' }, thumbnail: { url: 'https://ahastudio.github.io/my-image-assets/images/cbcl-products/12.jpg' }, name: 'CBCL EARRING Purple', price: 72000,
     }],
 };
+
+export const mockProductDetail = {
+  id: '0BV000PRO0002',
+  category: {
+    id: '0BV000CAT0001',
+    name: 'top',
+  },
+  images: [
+    {
+      url: 'https://ahastudio.github.io/my-image-assets/images/cbcl-products/02.jpg',
+    },
+  ],
+  name: 'CBCL 사틴셔츠',
+  price: 118000,
+  options: [
+    {
+      id: '0BV000OPT0003',
+      name: '컬러',
+      items: [
+        {
+          id: '0BV000ITEM006',
+          name: 'white',
+        },
+        {
+          id: '0BV000ITEM007',
+          name: 'black',
+        },
+        {
+          id: '0BV000ITEM008',
+          name: 'beige',
+        },
+      ],
+    },
+    {
+      id: '0BV000OPT0004',
+      name: '사이즈',
+      items: [
+        {
+          id: '0BV000ITEM009',
+          name: 'S',
+        },
+        {
+          id: '0BV000ITEM010',
+          name: 'M',
+        },
+        {
+          id: '0BV000ITEM011',
+          name: 'L',
+        },
+      ],
+    },
+  ],
+  description: 'Color: White, Black, Beige\nSize: S, M, L\n\n화이트 실크 소재의 살랑거리는 블라우스\n흘러 내리는듯한 실루엣으로 한층 우아한 분위기 연출',
+};
