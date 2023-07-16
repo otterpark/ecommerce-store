@@ -1,22 +1,24 @@
 import { InputHTMLAttributes, useId } from 'react';
 import styled from 'styled-components';
 
-import { BaseBoxPadding } from '@/styles/commonStyle';
-import { borderRadius, fontSize } from '@/styles/sizes';
+import { borderRadius, fontSize, space } from '@/styles/sizes';
 
 type InputTextProps = {
   type: 'text'| 'password' | 'email';
   label: string;
+  padding?: '' | string,
 } & InputHTMLAttributes<HTMLInputElement>
+
+type InputProps = Pick<InputTextProps, 'padding'>;
 
 const Label = styled.label`
   display: none;
 `;
 
-const Input = styled.input<InputHTMLAttributes<HTMLInputElement>>`
-  ${BaseBoxPadding};
-  height: 54px;
+const Input = styled.input<InputProps>`
   width: 100%;
+  height: 54px;
+  padding: ${(props) => (props.padding ? props.padding : `${space.xs} ${space.s}`)};
   border: 1px solid ${(props) => props.theme.colors.border};
   border-radius: ${borderRadius.default};
 
@@ -28,6 +30,7 @@ const Input = styled.input<InputHTMLAttributes<HTMLInputElement>>`
 
 export default function InputText({
   type = 'text',
+  padding = '',
   label,
   ...props
 }: InputTextProps) {
@@ -40,6 +43,7 @@ export default function InputText({
       </Label>
       <Input
         type={type}
+        padding={padding}
         id={id}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}

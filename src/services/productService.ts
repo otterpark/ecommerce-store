@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import { api } from '@/api/call';
 import {
-  GetCategoriesResponse, GetProductResponse, GetProductsRequestParams, GetProductsResponse,
+  GetCategoriesResponse, GetProductDetailResponse, GetProductsRequestParams, GetProductsResponse,
 } from '@/api/types/product';
 import { GET_PRODUCTS } from '@/api/url';
 import { Category, Product, ProductDetail } from '@/types/product';
@@ -28,8 +28,14 @@ const useProductService = () => {
     );
   };
 
+  const getProductDetail: BareFetcher<ProductDetail> = (url: string) => api.get<any, GetProductDetailResponse>(
+    url,
+  ).then(
+    (response: GetProductDetailResponse) => response,
+  );
+
   return {
-    getCategories, getProducts,
+    getCategories, getProductDetail, getProducts,
   };
 };
 

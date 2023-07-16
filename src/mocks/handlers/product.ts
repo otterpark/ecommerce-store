@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { rest } from 'msw';
 
-import { mockCategories, mockProducts } from '@/fixtures/__mocks__/api/product';
+import { mockCategories, mockProductDetail, mockProducts } from '@/fixtures/__mocks__/api/product';
 
-import { GET_CATEGORIES, GET_PRODUCTS } from '@/api/url';
+import { GET_CATEGORIES, GET_PRODUCTS, GET_PRODUCT_DETAIL } from '@/api/url';
 
 export const getCategories = (type?: 'Error') => rest.get(GET_CATEGORIES, (req, res, ctx) => {
   if (type) {
@@ -44,4 +44,19 @@ export const getProducts = (type?: 'Error'| 'HasCategory') => rest.get(GET_PRODU
   );
 });
 
-export default [getCategories(), getProducts()];
+export const getProductDetail = (type?: 'Error'| 'HasCategory') => rest.get(`${GET_PRODUCT_DETAIL}/:productId`, (req, res, ctx) => {
+  if (type === 'Error') {
+    return res(
+      ctx.delay(),
+      ctx.status(400),
+    );
+  }
+
+  return res(
+    ctx.delay(),
+    ctx.status(201),
+    ctx.json(mockProductDetail),
+  );
+});
+
+export default [getCategories(), getProducts(), getProductDetail()];

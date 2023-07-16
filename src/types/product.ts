@@ -22,3 +22,20 @@ export type Product = {
 export type Products = {
   products: Product[];
 }
+
+export type Item = {
+  id: string;
+  name: string;
+}
+
+export type Option = {
+  id: string;
+  name: string;
+  items: Item[];
+}
+
+export type ProductDetail = {
+  images: Thumbnail[];
+  options: Option[];
+  description: string;
+} & Pick<Product, 'id' | 'category' | 'name' | 'price'>
