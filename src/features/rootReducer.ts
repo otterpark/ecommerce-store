@@ -2,7 +2,9 @@
 /* eslint-disable no-use-before-define */
 import { PreloadedState, combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import { persistReducer, persistStore } from 'redux-persist';
+import {
+  FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
 
 import { authReducer, modalReducer } from './slices';
@@ -23,13 +25,18 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
   return configureStore({
     reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+    devTools: process.env.NODE_ENV !== 'production',
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
     preloadedState,
   });
 }
 
 export const store = setupStore();
-export const persistor = persistStore(setupStore());
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>
