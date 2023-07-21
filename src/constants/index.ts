@@ -7,6 +7,7 @@ export const ERROR_MESSAGE = {
   },
   AUTH: {
     INVALED_ACCESS: '접근 권한이 없거나 잘못된 접근입니다.',
+    LOGIN_ACCESS: '로그인이 필요한 기능입니다. 로그인 후 이용해 주세요.',
   },
   PAGE: {
     NOT_FOUND: '페이지가 존재하지 않거나, \n 삭제되어 찾을 수 없어요!',
@@ -15,5 +16,15 @@ export const ERROR_MESSAGE = {
   PRODUCT: {
     FAIL_TO_FIND_CATEGORY: '해당 카테고리를 찾을 수 없습니다. \n 정상적인 루트로 진행해 주세요.',
     FAIL_TO_FIND_PRODUCT: '해당 상품을 찾을 수 없습니다. \n 정상적인 루트로 진행해 주세요.',
+  },
+  CART: {
+    NULL_CART_DATA: '장바구니에 담긴 상품이 없습니다',
+    FAIL_TO_ADD: '장바구니 넣기에 실패하였습니다. 잠시 후 다시 시도해 주세요.',
+  },
+};
+
+export const SUCCESS_MESSAGE = {
+  CART: {
+    SUCESS_TO_ADD: '해당 상품이 장바구니에 추가되었습니다.',
   },
 };

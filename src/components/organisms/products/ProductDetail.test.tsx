@@ -9,9 +9,16 @@ const context = describe;
 
 describe('ProductDetail', () => {
   const mockProduct = mockProductDetail;
+  const handleAddCart = jest.fn();
+
   const renderProductsDetail = () => {
     render(<ProductDetail productId={mockProduct.id} />);
   };
+
+  beforeEach(() => {
+    handleAddCart.mockClear();
+  });
+
   it('can see product detail', async () => {
     renderProductsDetail();
 
@@ -90,6 +97,20 @@ describe('ProductDetail', () => {
 
         expect(optionColor).toHaveTextContent('black');
         expect(itemBlack).not.toBeInTheDocument();
+      });
+    });
+  });
+
+  context('when add cart product', () => {
+    it('should call cart event', async () => {
+      renderProductsDetail();
+
+      await waitFor(async () => {
+        const cartButton = screen.getByAltText(/shopping-cart/);
+        cartButton.onclick = handleAddCart;
+
+        await userEvent.click(cartButton);
+        expect(handleAddCart).toBeCalledTimes(1);
       });
     });
   });

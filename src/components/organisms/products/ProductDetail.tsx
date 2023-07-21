@@ -1,26 +1,32 @@
-import { useEffect, useMemo, useState } from 'react';
+import {
+  MouseEvent, useEffect, useMemo, useState,
+} from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import styled, { css } from 'styled-components';
 
 import LoadingSpinner from '@/components/atoms/Loading';
-import Text from '@/components/atoms/texts/Text';
 import ProductInfoBody from '@/components/molecules/products/detail/ProductInfoBody';
 import ProductInfoButtons from '@/components/molecules/products/detail/ProductInfoButtons';
 import ProductTotalPrice from '@/components/molecules/products/detail/ProductTotalPrice';
 import ProductSelectBox from '@/components/molecules/products/detail/ProductSelectBox';
 import ProductQuantity from '@/components/molecules/products/detail/ProductQuantity';
 import DescriptionList from '@/components/molecules/descriptionList/DescriptionList';
+import ErrorMessage from '@/components/molecules/Error/ErrorMessage';
 import Thumbnail from '@/components/molecules/thumbnail/Thumbnail';
 
+import useCartService from '@/services/cartService';
+
 import useProduct from '@/hooks/useProduct';
+import useAlert from '@/hooks/useAlert';
+import useAuth from '@/hooks/useAuth';
+import useWindowSize from '@/hooks/useWindowResize';
 
 import { borderRadius, space } from '@/styles/sizes';
-
-import { ERROR_MESSAGE } from '@/constants';
-
-import { Item } from '@/types/product';
 import { breakpoints, size } from '@/styles/medias';
-import useWindowSize from '@/hooks/useWindowResize';
+
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@/constants';
+
+import { AddCartOption, AddCartRequest } from '@/api/types/cart';
 
 type StyledProductDetailProps = {
   isMobileOptionActive: boolean;
@@ -84,9 +90,7 @@ const ProductInfoOption = styled.div`
   }
 `;
 
-export type SelectedOptions = {
-  [key: string]: string;
-}
+export type SelectedOptions = AddCartOption[];
 
 type ProductDetailProps = {
   productId: string;
@@ -98,24 +102,31 @@ export default function ProductDetail({
   const windowSize = useWindowSize();
   const [isMobileOptionToggled, setIsMobileOptionToggled] = useState<boolean>(false);
 
-  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({});
+  // const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>({});
+  const [selectedOptions, setSelectedOptions] = useState<SelectedOptions>([]);
   const [openSelect, setOpenSelect] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
 
   const { productDetail } = useProduct();
+  const { showAlert } = useAlert();
+  const { auth } = useAuth();
+
+  const { addCart, getCart } = useCartService();
 
   const { data, error, isLoading } = productDetail(productId);
 
   useEffect(() => {
-    setSelectedOptions({});
+    setSelectedOptions([]);
     if (data) {
-      const setOptions: SelectedOptions = {};
+      const setOptions: SelectedOptions = [];
       // eslint-disable-next-line no-return-assign
-      data.options.map((option, index) => setOptions[option.id] = data.options[index].items[0].id);
-      setSelectedOptions({
-        ...selectedOptions,
+      data.options.map((option, index) => setOptions.push({
+        id: option.id,
+        itemId: data.options[index].items[0].id,
+      }));
+      setSelectedOptions([
         ...setOptions,
-      });
+      ]);
     }
   }, [data]);
 
@@ -125,13 +136,23 @@ export default function ProductDetail({
     }
   }, [windowSize.width]);
 
+  // eslint-disable-next-line max-len
   const isMobileOptionActive = useMemo(() => isMobileOptionToggled || (windowSize.width > size.tablet), [windowSize.width, isMobileOptionToggled]);
 
-  const handleOptionClick = (optionId: string, item: Item) => {
-    setSelectedOptions((prevSelectedOptions) => ({
-      ...prevSelectedOptions,
-      [optionId]: item.id,
-    }));
+  const handleOptionClick = (optionId: string, itemId: string) => {
+    const updateSelectOptions = selectedOptions.map((option) => {
+      if (option.id === optionId) {
+        // eslint-disable-next-line no-param-reassign
+        option.id = optionId;
+        // eslint-disable-next-line no-param-reassign
+        option.itemId = itemId;
+      }
+      return option;
+    });
+
+    setSelectedOptions([
+      ...updateSelectOptions,
+    ]);
   };
 
   const handleClickIncrease = () => {
@@ -144,12 +165,59 @@ export default function ProductDetail({
     setQuantity(quantity - 1);
   };
 
-  const toggleMobileOption = () => {
+  const toggleMobileOption = (event?: MouseEvent<HTMLDivElement>) => {
+    if (event) {
+      const { id } = (event.target as HTMLButtonElement);
+      // eslint-disable-next-line no-useless-return
+      if (id !== 'product-detail') return;
+    }
+
     setIsMobileOptionToggled(!isMobileOptionToggled);
   };
 
   const toggleDropdown = (selectId: string) => {
     setOpenSelect((prevOpenSelect) => (prevOpenSelect === selectId ? null : selectId));
+  };
+
+  const handleAddCart = () => {
+    if (!auth.isAuthenticated) {
+      showAlert(ERROR_MESSAGE.AUTH.LOGIN_ACCESS);
+      return;
+    }
+
+    if (windowSize.width < size.tablet && !isMobileOptionToggled) {
+      toggleMobileOption();
+      return;
+    }
+
+    const requestAddCart: AddCartRequest = {
+      productId,
+      options: [],
+      quantity,
+    };
+
+    if (selectedOptions.length) {
+      requestAddCart.options = [...selectedOptions];
+    }
+
+    addCart(
+      requestAddCart,
+      () => {
+        getCart(
+          () => {
+            showAlert(SUCCESS_MESSAGE.CART.SUCESS_TO_ADD);
+            setQuantity(1);
+            toggleMobileOption();
+          },
+          () => {
+            showAlert(ERROR_MESSAGE.CART.FAIL_TO_ADD);
+          },
+        );
+      },
+      () => {
+        showAlert(ERROR_MESSAGE.CART.FAIL_TO_ADD);
+      },
+    );
   };
 
   if (isLoading) {
@@ -158,18 +226,16 @@ export default function ProductDetail({
 
   if (error || !data) {
     return (
-      <Text
-        textSize="default"
-        textAlign="center"
-        text={ERROR_MESSAGE.PRODUCT.FAIL_TO_FIND_PRODUCT}
-        color="text"
-        mb="xs"
-      />
+      <ErrorMessage message={ERROR_MESSAGE.PRODUCT.FAIL_TO_FIND_PRODUCT} />
     );
   }
 
   return (
-    <StyledProductDetail isMobileOptionActive={isMobileOptionActive}>
+    <StyledProductDetail
+      id="product-detail"
+      onClick={toggleMobileOption}
+      isMobileOptionActive={isMobileOptionActive}
+    >
       <Thumbnail
         style={{ flex: '0 0 50%' }}
         imageUrl={data?.images[0].url}
@@ -206,7 +272,9 @@ export default function ProductDetail({
               <ProductTotalPrice price={data.price} quantity={quantity} />
             </ProductInfoOption>
           )}
-          <ProductInfoButtons toggleMobileOption={toggleMobileOption} />
+          <ProductInfoButtons
+            handleAddCart={handleAddCart}
+          />
         </ProductInfoFooter>
       </ProductInfo>
     </StyledProductDetail>

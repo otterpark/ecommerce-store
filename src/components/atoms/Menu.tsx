@@ -1,13 +1,14 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { breakpoints } from '@/styles/medias';
+import { breakpoints, size } from '@/styles/medias';
 import { space } from '@/styles/sizes';
 
 import useProduct from '@/hooks/useProduct';
-import { useRouter } from 'next/router';
 
 type MenuProps = {
+  windowWidth: number;
   isToggled: boolean;
   setIsToggled: (isToggled: boolean) => void;
 }
@@ -17,7 +18,6 @@ type StyledMenuProps = Pick<MenuProps, 'isToggled'>
 const StyledMenu = styled.ul<StyledMenuProps>`
   display: flex;
   flex-direction: columns;
-  align-items: center;
   margin-left: 3.2rem;
   gap: ${space.m};
   li {
@@ -39,23 +39,31 @@ const StyledMenu = styled.ul<StyledMenuProps>`
     z-index: ${(props) => (props.isToggled ? '1' : '-1')};
     opacity: ${(props) => (props.isToggled ? '1' : '0')};
     flex-direction: column;
-    padding: ${space.s};
+    padding: ${space.xs} 0;
+    gap: 0;
     li {
-      padding: 1.6rem 2.4rem;
+      padding: ${space.s} ${space.s};
+      a {
+        width: 100%;
+      }
     }
   }
 `;
 
 export default function Menu({
-  isToggled, setIsToggled,
+  windowWidth, isToggled, setIsToggled,
 }: MenuProps) {
   const router = useRouter();
   const { categories } = useProduct();
 
   const handleClick = (url: string, event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    setIsToggled(!isToggled);
     router.push(url);
+
+    if (windowWidth > size.tablet) {
+      return;
+    }
+    setIsToggled(!isToggled);
   };
 
   return (

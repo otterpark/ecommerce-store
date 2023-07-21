@@ -23,14 +23,14 @@ const StyledProductInfoButtons = styled.div`
 `;
 
 type ProductInfoButtonsProps = {
-  toggleMobileOption: () => void;
+  handleAddCart: () => void;
 };
 
-export default function ProductInfoButtons({ toggleMobileOption }: ProductInfoButtonsProps) {
+export default function ProductInfoButtons({ handleAddCart }: ProductInfoButtonsProps) {
   return (
     <StyledProductInfoButtons>
       <Button
-        onClick={toggleMobileOption}
+        onClick={handleAddCart}
       >
         <Image
           src="/assets/icons/shopping-cart.png"
@@ -39,7 +39,7 @@ export default function ProductInfoButtons({ toggleMobileOption }: ProductInfoBu
           height={20}
         />
       </Button>
-      <Button onClick={toggleMobileOption} isPrimary>주문하기</Button>
+      <Button isPrimary>주문하기</Button>
     </StyledProductInfoButtons>
   );
 }

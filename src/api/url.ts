@@ -8,3 +8,7 @@ export const USER_INFO = '/users/me';
 export const GET_CATEGORIES = '/categories';
 export const GET_PRODUCTS = '/products';
 export const GET_PRODUCT_DETAIL = '/products';
+
+// Cart
+export const ADD_CART = '/cart/line-items';
+export const GET_CART = '/cart';

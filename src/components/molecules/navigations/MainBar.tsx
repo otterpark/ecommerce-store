@@ -13,10 +13,10 @@ const MainBarWrap = styled.div`
 
 const MainBarDiv = styled.div`
   display: flex;
+  align-items: center;
 
   ${breakpoints.tablet} {
     justify-content: space-between;
-    align-items: center;
   }
 `;
 

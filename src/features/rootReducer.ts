@@ -7,16 +7,17 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
 
-import { authReducer, modalReducer } from './slices';
+import { authReducer, modalReducer, cartReducer } from './slices';
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'cart'],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  cart: cartReducer,
   modal: modalReducer,
 });
 
