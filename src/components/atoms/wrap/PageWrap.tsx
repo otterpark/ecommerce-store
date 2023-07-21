@@ -10,7 +10,7 @@ type PageWrapProps = {
 const PageWrapContainer = styled.div`
   padding: ${interval.page.paddingHorizontal} 0 ${interval.page.paddingVertical};
   ${breakpoints.largeDesktop} {
-    padding: ${space.l} ${space.s} ${interval.page.paddingVertical};
+    padding: ${space.l} ${space.s} ${space.l};
   }
 `;
 

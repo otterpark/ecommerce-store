@@ -5,7 +5,7 @@ import { borderRadius, maxWidth, space } from '@/styles/sizes';
 import { breakpoints } from '@/styles/medias';
 
 const StyledModalBox = styled.div`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

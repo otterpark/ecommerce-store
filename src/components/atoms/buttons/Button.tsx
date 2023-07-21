@@ -8,7 +8,9 @@ type BorderRadius = `${string | number} ${string | number} ${string | number} ${
 type ButtonProps = {
   type?: 'button' | 'submit',
   children: ReactNode,
-  height?: number;
+  width?: string | 'auto';
+  height?: string | 'auto';
+  padding?: string;
   isPrimary?: boolean,
   isDisabled?: boolean,
   borderRadius?: BorderRadius;
@@ -17,9 +19,9 @@ type ButtonProps = {
 const DefaultButton = styled.button<ButtonProps>`
   background: ${(props) => (props.isPrimary ? props.theme.colors.primary : 'white')};
   color: ${(props) => (props.isPrimary ? 'white' : props.theme.colors.text)};
-  padding: ${space.xs} ${space.xs};
-  height: ${(props) => props.height}px;
-  width: 100%;
+  padding: ${(props) => props.padding};
+  height: ${(props) => props.height};
+  width: ${(props) => props.width};
   border: 1px solid ${(props) => (props.isPrimary ? props.theme.colors.primary : props.theme.colors.border)};
   border-radius: ${(props) => ((props.borderRadius) ? props.borderRadius : borderRadius.default)};
   font-size: ${fontSize.s};
@@ -36,7 +38,9 @@ export default function Button({
   children,
   isDisabled = false,
   isPrimary = false,
-  height = 54,
+  width = '100%',
+  height = '54px',
+  padding = `${space.xs} ${space.xs}`,
   type = 'button',
   ...props
 }: ButtonProps) {
@@ -44,7 +48,9 @@ export default function Button({
     <DefaultButton
       type={type}
       isPrimary={isPrimary}
+      width={width}
       height={height}
+      padding={padding}
       disabled={isDisabled}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

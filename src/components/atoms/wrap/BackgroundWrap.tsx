@@ -12,11 +12,12 @@ type StyleBackgroundWrapProps = Pick<BackgroundWrapProps, 'backgroundColor' | 'i
 
 const StyledBackgroundWrap = styled.div<StyleBackgroundWrapProps>`
   ${(props) => props.isPositionFixed && css`
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    z-index: 99;
   `}
   background-color: ${(props) => props.backgroundColor};
 `;

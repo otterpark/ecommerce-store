@@ -1,25 +1,28 @@
 import { InputHTMLAttributes, useId } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { borderRadius, fontSize, space } from '@/styles/sizes';
 
 type InputTextProps = {
   type: 'text'| 'password' | 'email';
+  width?: string;
+  height?: string;
   label: string;
-  padding?: '' | string,
+  isBorderNone?: boolean;
+  padding?: '' | string;
 } & InputHTMLAttributes<HTMLInputElement>
 
-type InputProps = Pick<InputTextProps, 'padding'>;
+type InputProps = Pick<InputTextProps, 'padding' | 'isBorderNone' | 'width' | 'height'>;
 
 const Label = styled.label`
   display: none;
 `;
 
 const Input = styled.input<InputProps>`
-  width: 100%;
-  height: 54px;
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   padding: ${(props) => (props.padding ? props.padding : `${space.xs} ${space.s}`)};
-  border: 1px solid ${(props) => props.theme.colors.border};
+  border: ${(props) => (props.isBorderNone ? 'none' : `1px solid ${props.theme.colors.border};`)};
   border-radius: ${borderRadius.default};
 
   font-size: ${fontSize.s};
@@ -29,8 +32,11 @@ const Input = styled.input<InputProps>`
 `;
 
 export default function InputText({
+  width = '100%',
+  height = '54px',
   type = 'text',
   padding = '',
+  isBorderNone = false,
   label,
   ...props
 }: InputTextProps) {
@@ -43,8 +49,11 @@ export default function InputText({
       </Label>
       <Input
         type={type}
+        width={width}
+        height={height}
         padding={padding}
         id={id}
+        isBorderNone={isBorderNone}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...props}
       />
