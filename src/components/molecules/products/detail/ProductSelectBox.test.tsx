@@ -17,9 +17,10 @@ describe('ProductSelectBox ', () => {
       data={mockProduct}
       openSelect={mockProduct.options[0].id}
       index={0}
-      selectedOptions={{
-        '0BV000OPT0003': '0BV000ITEM006',
-      }}
+      selectedOptions={[
+        { id: '0BV000OPT0003', itemId: '0BV000ITEM006' },
+        { id: '0BV000OPT0004', itemId: '0BV000ITEM009' },
+      ]}
       toggleDropdown={toggleDropdown}
       handleOptionClick={handleOptionClick}
     />);

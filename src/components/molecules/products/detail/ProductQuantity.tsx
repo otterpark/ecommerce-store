@@ -7,12 +7,14 @@ import InputText from '@/components/molecules/inputs/InputText';
 import { space } from '@/styles/sizes';
 
 const Quantity = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
+  align-items: center;
   gap: ${space.xs};
   button, input {
-    flex: 1 1 0;
     text-align: center;
+    display: flex;
+    align-items: start;
   }
 `;
 
@@ -29,6 +31,9 @@ export default function ProductQuantity({
     <Quantity>
       <Button
         onClick={handleClickDecrease}
+        width="30px"
+        padding={space.xxs}
+        height="auto"
       >
         <Image
           src="/assets/icons/minus.png"
@@ -37,8 +42,13 @@ export default function ProductQuantity({
           height={15}
         />
       </Button>
-      <InputText type="text" label="quantity" padding={`${space.xs} 0`} value={quantity} readOnly />
-      <Button onClick={handleClickIncrease}>
+      <InputText isBorderNone type="text" label="quantity" padding="0" value={quantity} width="18px" height="auto" readOnly />
+      <Button
+        onClick={handleClickIncrease}
+        padding={space.xxs}
+        width="30px"
+        height="auto"
+      >
         <Image
           src="/assets/icons/plus.png"
           alt="plus-icon"

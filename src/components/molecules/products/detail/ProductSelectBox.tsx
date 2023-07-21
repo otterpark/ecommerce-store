@@ -20,7 +20,7 @@ type ProductSelectBoxProps = {
   index: number;
   selectedOptions: SelectedOptions
   toggleDropdown: (optionId: string) => void;
-  handleOptionClick: (optionId: string, item: Item) => void;
+  handleOptionClick: (optionId: string, itemId: string) => void;
 }
 
 const Arrow = styled.div`
@@ -47,7 +47,7 @@ export default function ProductSelectBox({
       <SelectedOption
         data-testid={`select-option-${option.name}`}
       >
-        {findSelectName(selectedOptions[option.id])}
+        {findSelectName(selectedOptions[index]?.itemId)}
       </SelectedOption>
       <Arrow>
         <Image

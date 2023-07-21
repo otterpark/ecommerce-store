@@ -32,7 +32,7 @@ const Options = styled.ul`
 type ProductOptionsProps = {
   data: ProductDetail;
   index: number;
-  handleOptionClick: (optionId: string, item: Item) => void;
+  handleOptionClick: (optionId: string, itemId: string) => void;
 }
 
 export default function ProductOptions({
