@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import PageWrap from '@/components/atoms/wrap/PageWrap';
-import CartList from '@/components/organisms/cart/cartList';
+import CartList from '@/components/organisms/cart/CartList';
 
 import { maxWidth } from '@/styles/sizes';
 
