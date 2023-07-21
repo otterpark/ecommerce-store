@@ -4,15 +4,17 @@ import {
   GetUserInfoResponse, LoginRequest, LoginResponse, SignupRequest, SignupResponse,
 } from '@/api/types/user';
 import {
+  GET_CART,
   LOGIN, LOGOUT, SIGNUP, USER_INFO,
 } from '@/api/url';
 
-import { clearAuth, setAuth, setUserInfo } from '@/features';
-
-import { useAppDispatch } from '@/hooks/useReduxWithType';
+import { GetCartResponse } from '@/api/types/cart';
+import useAuth from '@/hooks/useAuth';
+import useCart from '@/hooks/useCart';
 
 const useUserService = () => {
-  const dispatch = useAppDispatch();
+  const { updateAuth, updateUserInfo, resetAuth } = useAuth();
+  const { updateCart, resetCart } = useCart();
 
   const login = (
     body: Partial<LoginRequest>,
@@ -25,17 +27,13 @@ const useUserService = () => {
     )
       .then(
         (response: LoginResponse) => {
-          dispatch(
-            setAuth({
-              isAuthenticated: true,
-              accessToken: response.accessToken,
-            }),
-          );
+          updateAuth(response.accessToken);
           onSuccess && onSuccess();
         },
       )
       .catch(() => {
-        dispatch(clearAuth());
+        resetAuth();
+        resetCart();
         onError && onError();
       });
   };
@@ -49,7 +47,8 @@ const useUserService = () => {
     )
       .then(
         () => {
-          dispatch(clearAuth());
+          resetAuth();
+          resetCart();
           onSuccess && onSuccess();
         },
       )
@@ -69,17 +68,13 @@ const useUserService = () => {
     )
       .then(
         (response: SignupResponse) => {
-          dispatch(
-            setAuth({
-              isAuthenticated: true,
-              accessToken: response.accessToken,
-            }),
-          );
+          updateAuth(response.accessToken);
           onSuccess && onSuccess();
         },
       )
       .catch(() => {
-        dispatch(clearAuth());
+        resetAuth();
+        resetCart();
         onError && onError();
       });
   };
@@ -88,22 +83,28 @@ const useUserService = () => {
     onSuccess?: () => void,
     onError?: () => void,
   ) => {
-    api.get<any, GetUserInfoResponse>(
-      USER_INFO,
-    )
-      .then(
-        (response: GetUserInfoResponse) => {
-          dispatch(
-            setUserInfo({
-              id: response.id,
-              name: response.name,
-            }),
-          );
-          onSuccess && onSuccess();
-        },
-      )
+    Promise.all([
+      api.get<any, GetUserInfoResponse>(USER_INFO),
+      api.get<any, GetCartResponse>(GET_CART),
+    ])
+      .then(async (response: [GetUserInfoResponse, GetCartResponse]) => {
+        const userInfo = response[0];
+        const cart = response[1];
+
+        await updateUserInfo({
+          id: userInfo.id,
+          name: userInfo.name,
+        });
+
+        await updateCart({
+          lineItems: cart.lineItems,
+          totalPrice: cart.totalPrice,
+        });
+        onSuccess && onSuccess();
+      })
       .catch(() => {
-        dispatch(clearAuth());
+        resetAuth();
+        resetCart();
         onError && onError();
       });
   };
