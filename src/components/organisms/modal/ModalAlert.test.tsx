@@ -1,4 +1,4 @@
-import { render, screen } from '@/utils/tests/renderWithProvider';
+import { render, screen } from '@/utils/tests/renderWithRedux';
 import ModalAlert from './ModalAlert';
 
 jest.unmock('react-redux');

@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event';
 
-import { render, screen } from '@/utils/tests/renderWithProvider';
+import { render, screen } from '@/utils/tests/renderWithRedux';
 
 import LoginForm from './LoginForm';
 

@@ -1,6 +1,6 @@
 import {
   render, screen, waitForElementToBeRemoved,
-} from '@/utils/tests/renderWithProvider';
+} from '@/utils/tests/renderWithRedux';
 import userEvent from '@testing-library/user-event';
 
 // eslint-disable-next-line import/no-extraneous-dependencies

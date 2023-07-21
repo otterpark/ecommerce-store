@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { render, screen, waitFor } from '@/utils/tests/renderWithProvider';
+import { render, screen, waitFor } from '@/utils/tests/renderWithRedux';
 
 import mockRouter from 'next-router-mock';
 
