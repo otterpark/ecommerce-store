@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { FunctionComponent, useEffect } from 'react';
 
 import useAlert from '@/hooks/useAlert';
+import useAuth from '@/hooks/useAuth';
 
 import { ERROR_MESSAGE } from '@/constants';
 import { NextPageWithLayout } from '@/pages/_app.page';
-import { useAppSelector } from '@/hooks/useReduxWithType';
 
 export default function withAccessPermission<P extends object>(
   WrappedComponent: FunctionComponent<P> & NextPageWithLayout,
@@ -16,7 +16,7 @@ export default function withAccessPermission<P extends object>(
   return (props: P) => {
     const getLayout = WrappedComponent.getLayout ?? ((page) => page);
     const router = useRouter();
-    const { auth } = useAppSelector((state) => state);
+    const { auth } = useAuth();
     const { showAlert } = useAlert();
 
     function goHomepage() {
