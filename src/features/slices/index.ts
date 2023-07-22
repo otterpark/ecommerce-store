@@ -1,3 +1,3 @@
 export * from './auth';
 export * from './cart';
-export * from './modal';
+export * from './alert';

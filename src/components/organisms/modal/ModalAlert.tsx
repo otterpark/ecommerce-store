@@ -13,7 +13,7 @@ import { borderRadius } from '@/styles/sizes';
 const StyledModalAlert = styled.div``;
 
 export default function ModalAlert() {
-  const { isActive, message } = useAppSelector((state) => state.modal);
+  const { isActive, message } = useAppSelector((state) => state.alert);
   const { hideAlert } = useAlert();
 
   const handleClick = () => {

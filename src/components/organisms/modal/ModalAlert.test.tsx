@@ -17,7 +17,7 @@ describe('ModalAlert ', () => {
     it('return none', () => {
       render(<ModalAlert />, {
         preloadedState: {
-          modal: {
+          alert: {
             isActive: true,
             message: 'test',
           },
