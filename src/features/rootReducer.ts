@@ -7,7 +7,9 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage/session';
 
-import { authReducer, alertReducer, cartReducer } from './slices';
+import {
+  authReducer, alertReducer, cartReducer, modalReducer,
+} from './slices';
 
 const persistConfig = {
   key: 'root',
@@ -19,6 +21,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   alert: alertReducer,
+  modal: modalReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -28,9 +31,7 @@ export function setupStore(preloadedState?: PreloadedState<RootState>) {
     reducer: persistedReducer,
     devTools: process.env.NODE_ENV !== 'production',
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      serializableCheck: false,
     }),
     preloadedState,
   });

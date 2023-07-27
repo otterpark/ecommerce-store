@@ -12,6 +12,7 @@ const StyledModalBox = styled.div`
   border-radius: ${borderRadius.default};
   background-color: ${(props) => props.theme.colors.white};
   max-width: ${maxWidth.middle}px;
+  min-width: ${maxWidth.middle}px;
 
   ${breakpoints.tablet} {
     width: calc(100% - ${space.l});

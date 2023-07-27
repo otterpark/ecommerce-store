@@ -6,14 +6,14 @@ export type Alert = {
   message: string;
 }
 
-type OpenAlertProps = Pick<Alert, 'message'>;
+type AlertMessage = Pick<Alert, 'message'>;
 
 export const alertInitialState: Alert = {
   isActive: false,
   message: '',
 };
 
-const _openAlert: CaseReducer<Alert, PayloadAction<OpenAlertProps>> = (state, action) => {
+const _openAlert: CaseReducer<Alert, PayloadAction<AlertMessage>> = (state, action) => {
   const { message } = action.payload;
 
   return {
