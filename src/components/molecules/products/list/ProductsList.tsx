@@ -59,8 +59,8 @@ type ProductsListProps = {
 }
 
 export default function ProductsList({ categoryId = '' } : ProductsListProps) {
-  const { products } = useProduct();
-  const { data, error, isLoading } = products(categoryId);
+  const { productList } = useProduct();
+  const { data, error, isLoading } = productList(categoryId);
 
   if (isLoading) {
     return <LoadingSpinner />;

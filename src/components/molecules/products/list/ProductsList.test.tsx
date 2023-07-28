@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@/utils/tests/renderWithSWR';
 
 import server from '@/mocks/server';
 
-import { getProducts } from '@/mocks/handlers/product';
+import { getProductList } from '@/mocks/handlers/product';
 import ProductsList from './ProductsList';
 
 const context = describe;
@@ -30,7 +30,7 @@ describe('ProductsList ', () => {
 
   context('when category is valid', () => {
     it('category is "top" should get "top" products', async () => {
-      server.use(getProducts('HasCategory'));
+      server.use(getProductList('HasCategory'));
       renderProductsList();
 
       await waitFor(() => {
@@ -43,7 +43,7 @@ describe('ProductsList ', () => {
 
   context('when server error in products url', () => {
     it('show error message', async () => {
-      server.use(getProducts('Error'));
+      server.use(getProductList('Error'));
       renderProductsList();
       await waitFor(() => {
         expect(screen.getByText(/해당 카테고리를 찾을 수 없습니다/)).toBeInTheDocument();

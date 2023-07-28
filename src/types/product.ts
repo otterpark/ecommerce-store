@@ -19,7 +19,7 @@ export type Product = {
   price: number;
 }
 
-export type Products = {
+export type ProductList = {
   products: Product[];
 }
 

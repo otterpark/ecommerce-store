@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import { api } from '@/api/call';
 import {
-  GetCategoriesResponse, GetProductDetailResponse, GetProductsRequestParams, GetProductsResponse,
+  GetCategoriesResponse, GetProductResponse, GetProductsRequestParams, GetProductsResponse,
 } from '@/api/types/product';
-import { GET_PRODUCTS } from '@/api/url';
+import { GET_PRODUCT_LIST } from '@/api/url';
 import { Category, Product, ProductDetail } from '@/types/product';
 import { BareFetcher } from 'swr/_internal';
 
@@ -15,7 +15,7 @@ const useProductService = () => {
     (response: GetCategoriesResponse) => response.categories,
   );
 
-  const getProducts: BareFetcher<Product[]> = (categoryId: string) => {
+  const getProductList: BareFetcher<Product[]> = (categoryId: string) => {
     let params: GetProductsRequestParams = {};
     if (categoryId) {
       params = {
@@ -23,19 +23,19 @@ const useProductService = () => {
       };
     }
 
-    return api.get<any, GetProductsResponse>(GET_PRODUCTS, { params }).then(
+    return api.get<any, GetProductsResponse>(GET_PRODUCT_LIST, { params }).then(
       (response: GetProductsResponse) => response.products,
     );
   };
 
-  const getProductDetail: BareFetcher<ProductDetail> = (url: string) => api.get<any, GetProductDetailResponse>(
+  const getProduct: BareFetcher<ProductDetail> = (url: string) => api.get<any, GetProductResponse>(
     url,
   ).then(
-    (response: GetProductDetailResponse) => response,
+    (response: GetProductResponse) => response,
   );
 
   return {
-    getCategories, getProductDetail, getProducts,
+    getCategories, getProductList, getProduct,
   };
 };
 

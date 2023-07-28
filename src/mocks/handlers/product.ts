@@ -3,7 +3,7 @@ import { rest } from 'msw';
 
 import { mockCategories, mockProductDetail, mockProducts } from '@/fixtures/__mocks__/api/product';
 
-import { GET_CATEGORIES, GET_PRODUCTS, GET_PRODUCT_DETAIL } from '@/api/url';
+import { GET_CATEGORIES, GET_PRODUCT_LIST, GET_PRODUCT } from '@/api/url';
 
 export const getCategories = (type?: 'Error') => rest.get(GET_CATEGORIES, (req, res, ctx) => {
   if (type) {
@@ -20,7 +20,7 @@ export const getCategories = (type?: 'Error') => rest.get(GET_CATEGORIES, (req, 
   );
 });
 
-export const getProducts = (type?: 'Error'| 'HasCategory') => rest.get(GET_PRODUCTS, (req, res, ctx) => {
+export const getProductList = (type?: 'Error'| 'HasCategory') => rest.get(GET_PRODUCT_LIST, (req, res, ctx) => {
   if (type === 'Error') {
     return res(
       ctx.delay(),
@@ -44,7 +44,7 @@ export const getProducts = (type?: 'Error'| 'HasCategory') => rest.get(GET_PRODU
   );
 });
 
-export const getProductDetail = (type?: 'Error'| 'HasCategory') => rest.get(`${GET_PRODUCT_DETAIL}/:productId`, (req, res, ctx) => {
+export const getProduct = (type?: 'Error'| 'HasCategory') => rest.get(`${GET_PRODUCT}/:productId`, (req, res, ctx) => {
   if (type === 'Error') {
     return res(
       ctx.delay(),
@@ -59,4 +59,4 @@ export const getProductDetail = (type?: 'Error'| 'HasCategory') => rest.get(`${G
   );
 });
 
-export default [getCategories(), getProducts(), getProductDetail()];
+export default [getCategories(), getProductList(), getProduct()];

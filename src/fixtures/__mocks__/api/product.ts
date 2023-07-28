@@ -1,4 +1,4 @@
-import { Categories, Products } from '@/types/product';
+import { Categories, ProductList } from '@/types/product';
 
 export const mockCategories: Categories = {
   categories: [
@@ -8,7 +8,7 @@ export const mockCategories: Categories = {
     { id: '0BV000CAT0004', name: 'acc' }],
 };
 
-export const mockProducts: Products = {
+export const mockProducts: ProductList = {
   products: [
     {
       id: '0BV000PRO0001', category: { id: '0BV000CAT0001', name: 'top' }, thumbnail: { url: 'https://ahastudio.github.io/my-image-assets/images/cbcl-products/01.jpg' }, name: 'CBCL 하트자수맨투맨', price: 128000,

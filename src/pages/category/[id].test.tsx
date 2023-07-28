@@ -4,7 +4,7 @@ import { render, screen, waitFor } from '@/utils/tests/renderWithSWR';
 import mockRouter from 'next-router-mock';
 
 import server from '@/mocks/server';
-import { getProducts } from '@/mocks/handlers/product';
+import { getProductList } from '@/mocks/handlers/product';
 
 import CategoryPage from './[id].page';
 
@@ -28,7 +28,7 @@ describe('CategoryPage ', () => {
 
   context('when there has no category for product', () => {
     it('show error message', async () => {
-      server.use(getProducts('Error'));
+      server.use(getProductList('Error'));
       renderCategorypage();
 
       await waitFor(() => {

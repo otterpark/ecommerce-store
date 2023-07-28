@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from '@/utils/tests/renderWithSWR';
 
 import server from '@/mocks/server';
-import { getProducts } from '@/mocks/handlers/product';
+import { getProductList } from '@/mocks/handlers/product';
 
 import HomePage from './index.page';
 
@@ -25,7 +25,7 @@ describe('HomePage ', () => {
 
   context('when there has no category for product', () => {
     it('show error message', async () => {
-      server.use(getProducts('Error'));
+      server.use(getProductList('Error'));
       renderHomepage();
 
       await waitFor(() => {

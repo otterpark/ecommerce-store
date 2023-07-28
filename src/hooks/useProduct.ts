@@ -1,23 +1,23 @@
 import useSWR from 'swr';
 
-import { GET_CATEGORIES, GET_PRODUCTS, GET_PRODUCT_DETAIL } from '@/api/url';
+import { GET_CATEGORIES, GET_PRODUCT_LIST, GET_PRODUCT } from '@/api/url';
 
 import useProductService from '@/services/productService';
 
 import { Category, Product, ProductDetail } from '@/types/product';
 
 export default function useProduct() {
-  const { getCategories, getProductDetail, getProducts } = useProductService();
+  const { getCategories, getProduct, getProductList } = useProductService();
 
   const categories = useSWR<Category[]>(GET_CATEGORIES, getCategories);
   // eslint-disable-next-line max-len
-  const products = (categoryId: string) => useSWR<Product[]>(`/api/${GET_PRODUCTS}?categoryId=${categoryId}`, () => getProducts(categoryId));
+  const productList = (categoryId: string) => useSWR<Product[]>(`/api/${GET_PRODUCT_LIST}?categoryId=${categoryId}`, () => getProductList(categoryId));
 
-  const productDetail = (productId: string) => useSWR<ProductDetail>(`${GET_PRODUCT_DETAIL}/${productId}`, getProductDetail);
+  const product = (productId: string) => useSWR<ProductDetail>(`${GET_PRODUCT}/${productId}`, getProduct);
 
   return {
     categories,
-    products,
-    productDetail,
+    productList,
+    product,
   };
 }
