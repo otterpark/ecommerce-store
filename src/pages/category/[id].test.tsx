@@ -12,7 +12,7 @@ const context = describe;
 
 describe('CategoryPage ', () => {
   mockRouter.push('/category/0BV000CAT0001');
-  const renderCategorypage = () => render(<CategoryPage />);
+  const renderCategorypage = () => render(<CategoryPage id="0BV000CAT0001" />);
 
   context('when render CategoryPage', () => {
     it('can see all categories products', async () => {

@@ -1,5 +1,5 @@
 import { ReactElement, useMemo } from 'react';
-import { useRouter } from 'next/router';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 import PageWrap from '@/components/atoms/wrap/PageWrap';
@@ -9,9 +9,12 @@ import { maxWidth } from '@/styles/sizes';
 
 import Layout from '../layout';
 
-function ProductsDetailPage() {
-  const { id } = useRouter().query;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const id = context.query.id ?? '';
+  return { props: { id } };
+}
 
+function ProductsDetailPage({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const productId: string = useMemo(() => (Array.isArray(id) ? id[0] : id ?? ''), [id]);
 
   return (

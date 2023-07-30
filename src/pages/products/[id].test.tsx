@@ -15,19 +15,20 @@ jest.unmock('react-redux');
 
 const context = describe;
 
-describe('ProductsDetailpage ', () => {
+describe('ProductPage ', () => {
   mockRouter.push('/products/0BV000PRO0002');
+  const productId = '0BV000PRO0002';
 
   const renderProductsDetailpage = (auth?: Auth) => {
     // eslint-disable-next-line no-unused-expressions
     const { store } = (!auth) ? render(
       <>
-        <ProductsDetailPage />
+        <ProductsDetailPage id={productId} />
         <ModalAlert />
       </>,
     ) : render(
       <>
-        <ProductsDetailPage />
+        <ProductsDetailPage id={productId} />
         <ModalAlert />
       </>,
       {

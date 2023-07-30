@@ -1,4 +1,5 @@
 import { ReactElement, useMemo } from 'react';
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
 import styled from 'styled-components';
 
 import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
@@ -7,15 +8,16 @@ import ProductsList from '@/components/molecules/products/list/ProductsList';
 
 import { maxWidth } from '@/styles/sizes';
 
-import { useRouter } from 'next/router';
-
 import Layout from '../layout';
 
 const HomeContainer = styled.div``;
 
-function CategoryPage() {
-  const { id } = useRouter().query;
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const id = context.query.id ?? '';
+  return { props: { id } };
+}
 
+function CategoryPage({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const categoryId: string = useMemo(() => (Array.isArray(id) ? id[0] : id ?? ''), [id]);
 
   return (
