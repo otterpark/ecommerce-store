@@ -1,8 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import type { AppProps } from 'next/app';
-import { ReactElement, ReactNode } from 'react';
-import { NextPage } from 'next';
-
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset';
@@ -11,17 +6,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from '@/features';
 
 import ModalAlert from '@/components/organisms/modal/ModalAlert';
+import Modal from '@/components/organisms/modal/Modal';
+
+import { AppPropsWithLayout } from '@/types/nextPage';
 
 import defaultTheme from '../styles/defaultTheme';
 import GlobalStyle from '../styles/GlobalStyle';
-
-export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode
-}
-
-export type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout
-}
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const theme = defaultTheme;
@@ -39,6 +29,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
               {...pageProps}
             />,
           )}
+          <Modal />
           <ModalAlert />
         </PersistGate>
       </Provider>
