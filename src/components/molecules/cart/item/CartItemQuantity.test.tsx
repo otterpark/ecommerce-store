@@ -14,6 +14,6 @@ describe('CartItemQuantity', () => {
   it('render CartItemQuantity', () => {
     renderCartItemQuantity();
 
-    expect(screen.getByText('5')).toBeInTheDocument();
+    expect(screen.getByText('5개')).toBeInTheDocument();
   });
 });

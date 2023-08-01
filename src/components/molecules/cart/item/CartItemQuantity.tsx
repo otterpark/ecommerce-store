@@ -7,6 +7,7 @@ import { breakpoints } from '@/styles/medias';
 const Quantity = styled.div`
   width: 20px;
   text-align: center;
+  flex: 1 1 0;
 
   ${breakpoints.largeDesktop} {
     display: none;
@@ -24,7 +25,7 @@ export default function CartItemQuantity({ quantity }: CartItemQuantityProps) {
         textSize="s"
         textWeight="bold"
         textAlign="center"
-        text={`${quantity}`}
+        text={`${quantity}개`}
         color="text"
       />
     </Quantity>

@@ -1,5 +1,5 @@
 import { InputHTMLAttributes, useId } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { borderRadius, fontSize, space } from '@/styles/sizes';
 

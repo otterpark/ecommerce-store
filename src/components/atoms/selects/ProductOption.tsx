@@ -18,16 +18,16 @@ const StyledOption = styled.li`
 type ProductOptionProps = {
   option: Option;
   item: Item;
-  handleOptionClick: (optionId: string, itemId: string) => void;
+  handleClickOption: (optionId: string, itemId: string) => void;
 }
 
 export default function ProductOption({
-  option, item, handleOptionClick,
+  option, item, handleClickOption,
 }: ProductOptionProps) {
   return (
     <StyledOption
       data-testid={`item-${item.name}`}
-      onClick={() => handleOptionClick(option.id, item.id)}
+      onClick={() => handleClickOption(option.id, item.id)}
     >
       {item.name}
     </StyledOption>

@@ -6,9 +6,14 @@ export const USER_INFO = '/users/me';
 
 // Product
 export const GET_CATEGORIES = '/categories';
-export const GET_PRODUCTS = '/products';
-export const GET_PRODUCT_DETAIL = '/products';
+export const GET_PRODUCT_LIST = '/products';
+export const GET_PRODUCT = '/products';
 
 // Cart
 export const ADD_CART = '/cart/line-items';
 export const GET_CART = '/cart';
+
+// Order
+export const ORDER_CART = '/orders';
+export const GET_ORDER_LIST = '/orders';
+export const GET_ORDER = '/orders';

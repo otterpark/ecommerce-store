@@ -19,6 +19,7 @@ import useCartService from '@/services/cartService';
 import useProduct from '@/hooks/useProduct';
 import useAlert from '@/hooks/useAlert';
 import useAuth from '@/hooks/useAuth';
+import useCart from '@/hooks/useCart';
 import useWindowSize from '@/hooks/useWindowResize';
 
 import { borderRadius, space } from '@/styles/sizes';
@@ -27,6 +28,7 @@ import { breakpoints, size } from '@/styles/medias';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@/constants';
 
 import { AddCartOption, AddCartRequest } from '@/api/types/cart';
+import { useRouter } from 'next/router';
 
 type StyledProductDetailProps = {
   isMobileOptionActive: boolean;
@@ -99,6 +101,7 @@ type ProductDetailProps = {
 export default function ProductDetail({
   productId,
 }: ProductDetailProps) {
+  const router = useRouter();
   const windowSize = useWindowSize();
   const [isMobileOptionToggled, setIsMobileOptionToggled] = useState<boolean>(false);
 
@@ -107,13 +110,14 @@ export default function ProductDetail({
   const [openSelect, setOpenSelect] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
 
-  const { productDetail } = useProduct();
+  const { product } = useProduct();
   const { showAlert } = useAlert();
   const { auth } = useAuth();
+  const { cart } = useCart();
 
   const { addCart, getCart } = useCartService();
 
-  const { data, error, isLoading } = productDetail(productId);
+  const { data, error, isLoading } = product(productId);
 
   useEffect(() => {
     setSelectedOptions([]);
@@ -139,7 +143,7 @@ export default function ProductDetail({
   // eslint-disable-next-line max-len
   const isMobileOptionActive = useMemo(() => isMobileOptionToggled || (windowSize.width > size.tablet), [windowSize.width, isMobileOptionToggled]);
 
-  const handleOptionClick = (optionId: string, itemId: string) => {
+  const handleClickOption = (optionId: string, itemId: string) => {
     const updateSelectOptions = selectedOptions.map((option) => {
       if (option.id === optionId) {
         // eslint-disable-next-line no-param-reassign
@@ -163,6 +167,19 @@ export default function ProductDetail({
     if (quantity < 2) return;
 
     setQuantity(quantity - 1);
+  };
+
+  const handleClickMoveOrderPage = () => {
+    if (!auth.isAuthenticated) {
+      showAlert(ERROR_MESSAGE.AUTH.LOGIN_ACCESS);
+      return;
+    }
+
+    if (!cart.lineItems.length) {
+      showAlert(ERROR_MESSAGE.CART.NULL_CART_DATA);
+      return;
+    }
+    router.push('/order');
   };
 
   const toggleMobileOption = (event?: MouseEvent<HTMLDivElement>) => {
@@ -258,7 +275,7 @@ export default function ProductDetail({
                     index={index}
                     selectedOptions={selectedOptions}
                     toggleDropdown={toggleDropdown}
-                    handleOptionClick={handleOptionClick}
+                    handleClickOption={handleClickOption}
                   />
                 </DescriptionList>
               ))}
@@ -274,6 +291,7 @@ export default function ProductDetail({
           )}
           <ProductInfoButtons
             handleAddCart={handleAddCart}
+            handleClickMoveOrderPage={handleClickMoveOrderPage}
           />
         </ProductInfoFooter>
       </ProductInfo>

@@ -11,13 +11,15 @@ type TextProps = {
   textSize: keyof FontSize;
   textWeight?: 'normal' | 'bold';
   textAlign: 'left' | 'center' | 'right';
+  isBorder?: boolean;
+  isTextDecoration?: boolean;
   text: string;
   color: keyof ColorTheme;
   mb?: keyof Space | '';
   pb?: keyof Space | '';
 } & React.ImgHTMLAttributes<HTMLImageElement>
 
-type StyledTextProps = Pick<TextProps, 'textSize' | 'textWeight' | 'mb' | 'pb' | 'textAlign' | 'color'>;
+type StyledTextProps = Pick<TextProps, 'textSize' | 'textWeight' | 'textAlign' | 'mb' | 'pb' | 'isBorder' | 'isTextDecoration' | 'color'>;
 
 const StyledText = styled.p<StyledTextProps>`
   font-size: ${(props) => fontSize[props.textSize]};
@@ -30,6 +32,12 @@ const StyledText = styled.p<StyledTextProps>`
   ${(props) => props.pb && css`
     padding-bottom: ${space[props.pb]};
   `}
+  ${(props) => props.isBorder && css`
+    border-bottom: 1px solid ${props.theme.colors.border};
+  `}
+  ${(props) => props.isTextDecoration && css`
+    text-decoration: underline;
+  `}
   line-height: 1.3;
   word-break: keep-all;
   white-space: pre-line;
@@ -40,6 +48,8 @@ export default function Text({
   textWeight = 'normal',
   color = 'black',
   textAlign = 'left',
+  isBorder = false,
+  isTextDecoration = false,
   mb = '',
   pb = '',
   text,
@@ -49,8 +59,10 @@ export default function Text({
     <StyledText
       textSize={textSize}
       textWeight={textWeight}
-      color={color}
       textAlign={textAlign}
+      isBorder={isBorder}
+      isTextDecoration={isTextDecoration}
+      color={color}
       mb={mb}
       pb={pb}
       // eslint-disable-next-line react/jsx-props-no-spreading

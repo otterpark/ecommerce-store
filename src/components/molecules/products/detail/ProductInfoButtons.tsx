@@ -24,9 +24,13 @@ const StyledProductInfoButtons = styled.div`
 
 type ProductInfoButtonsProps = {
   handleAddCart: () => void;
+  handleClickMoveOrderPage: () => void;
 };
 
-export default function ProductInfoButtons({ handleAddCart }: ProductInfoButtonsProps) {
+export default function ProductInfoButtons({
+  handleAddCart,
+  handleClickMoveOrderPage,
+}: ProductInfoButtonsProps) {
   return (
     <StyledProductInfoButtons>
       <Button
@@ -39,7 +43,12 @@ export default function ProductInfoButtons({ handleAddCart }: ProductInfoButtons
           height={20}
         />
       </Button>
-      <Button isPrimary>주문하기</Button>
+      <Button
+        onClick={handleClickMoveOrderPage}
+        isPrimary
+      >
+        주문하기
+      </Button>
     </StyledProductInfoButtons>
   );
 }

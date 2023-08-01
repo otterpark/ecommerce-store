@@ -10,7 +10,7 @@ const context = describe;
 describe('ProductSelectBox ', () => {
   const mockProduct = mockProductDetail;
   const toggleDropdown = jest.fn();
-  const handleOptionClick = jest.fn();
+  const handleClickOption = jest.fn();
 
   const renderProductSelectBox = () => {
     render(<ProductSelectBox
@@ -22,7 +22,7 @@ describe('ProductSelectBox ', () => {
         { id: '0BV000OPT0004', itemId: '0BV000ITEM009' },
       ]}
       toggleDropdown={toggleDropdown}
-      handleOptionClick={handleOptionClick}
+      handleClickOption={handleClickOption}
     />);
   };
 
@@ -53,7 +53,7 @@ describe('ProductSelectBox ', () => {
       const selectItem = screen.getByText(/black/);
       await userEvent.click(selectItem);
 
-      expect(handleOptionClick).toBeCalledTimes(1);
+      expect(handleClickOption).toBeCalledTimes(1);
     });
   });
 });

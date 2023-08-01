@@ -1,23 +1,46 @@
-import { render, screen, waitFor } from '@/utils/tests/renderWithSWR';
+import { render, screen, waitFor } from '@/utils/tests/renderWithRedux';
+import mockRouter from 'next-router-mock';
+import { SWRConfig } from 'swr';
 import userEvent from '@testing-library/user-event';
 
 import { mockProductDetail } from '@/fixtures/__mocks__/api/product';
+import { mockCart } from '@/fixtures/__mocks__/api';
+
+import { Cart } from '@/types/cart';
+import { Auth } from '@/features';
 
 import ProductDetail from './ProductDetail';
+import ModalAlert from '../modal/ModalAlert';
+
+jest.unmock('react-redux');
 
 const context = describe;
 
 describe('ProductDetail', () => {
+  const initialCartState: Cart = { lineItems: [], totalPrice: 0 };
+  const initialAuthState: Auth = { isAuthenticated: false, accessToken: '', userInfo: { id: '', name: '' } };
+  const hasAuthState: Auth = { isAuthenticated: true, accessToken: 'accessToken', userInfo: { id: 'userId', name: 'user' } };
   const mockProduct = mockProductDetail;
-  const handleAddCart = jest.fn();
 
-  const renderProductsDetail = () => {
-    render(<ProductDetail productId={mockProduct.id} />);
+  const renderProductsDetail = (auth = initialAuthState, cart = mockCart) => {
+    const store = render(
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <ProductDetail productId={mockProduct.id} />
+        <ModalAlert />
+      </SWRConfig>,
+      {
+        preloadedState: {
+          cart: {
+            ...cart,
+          },
+          auth: {
+            ...auth,
+          },
+        },
+      },
+    );
+    return store;
   };
-
-  beforeEach(() => {
-    handleAddCart.mockClear();
-  });
 
   it('can see product detail', async () => {
     renderProductsDetail();
@@ -101,16 +124,73 @@ describe('ProductDetail', () => {
     });
   });
 
-  context('when add cart product', () => {
-    it('should call cart event', async () => {
-      renderProductsDetail();
+  context('when add cart product without login', () => {
+    it('should see alert "로그인이 필요한 기능입니다."', async () => {
+      renderProductsDetail(initialAuthState, initialCartState);
 
       await waitFor(async () => {
         const cartButton = screen.getByAltText(/shopping-cart/);
-        cartButton.onclick = handleAddCart;
-
         await userEvent.click(cartButton);
-        expect(handleAddCart).toBeCalledTimes(1);
+
+        expect(screen.getByText(/로그인이 필요한 기능입니다./));
+      });
+    });
+  });
+
+  context('when add cart product with login', () => {
+    it('should add cart data', async () => {
+      const { store } = renderProductsDetail(hasAuthState, initialCartState);
+
+      await waitFor(async () => {
+        const cartButton = screen.getByAltText(/shopping-cart/);
+        await userEvent.click(cartButton);
+
+        expect(screen.getByText(/해당 상품이 장바구니에 추가되었습니다./));
+        expect(store.getState().cart.lineItems.length).toBe(2);
+        expect(store.getState().cart.totalPrice).toBe(2178000);
+      });
+    });
+  });
+
+  context('when click order button without auth', () => {
+    it('should see alert "로그인이 필요한 기능입니다" ', async () => {
+      renderProductsDetail(initialAuthState, initialCartState);
+
+      await waitFor(async () => {
+        const button = screen.getByRole('button', { name: '주문하기' });
+        await userEvent.click(button);
+
+        expect(screen.getByText(/로그인이 필요한 기능입니다./));
+      });
+    });
+  });
+
+  context('when click order button without cart data', () => {
+    it('should see alert "장바구니에 상품을 넣으라는 문구" ', async () => {
+      renderProductsDetail(hasAuthState, initialCartState);
+
+      await waitFor(async () => {
+        const button = screen.getByRole('button', { name: '주문하기' });
+        await userEvent.click(button);
+
+        expect(screen.getByText(/장바구니에 담긴 상품이 없습니다./));
+      });
+    });
+  });
+
+  context('when click order button with cart, auth data', () => {
+    it('should move order router" ', async () => {
+      renderProductsDetail(hasAuthState, mockCart);
+
+      await waitFor(async () => {
+        const button = screen.getByRole('button', { name: '주문하기' });
+        await userEvent.click(button);
+
+        expect(mockRouter).toMatchObject({
+          asPath: '/order',
+          pathname: '/order',
+          query: {},
+        });
       });
     });
   });

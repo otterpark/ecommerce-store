@@ -6,13 +6,13 @@ import ProductOptions from './ProductOptions';
 
 describe('ProductOptions', () => {
   const mockProduct = mockProductDetail;
-  const handleOptionClick = jest.fn();
+  const handleClickOption = jest.fn();
 
   const renderProductOptions = () => render(
     <ProductOptions
       data={mockProduct}
       index={0}
-      handleOptionClick={handleOptionClick}
+      handleClickOption={handleClickOption}
     />,
   );
 

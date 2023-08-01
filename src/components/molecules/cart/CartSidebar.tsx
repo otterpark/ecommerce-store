@@ -1,16 +1,24 @@
 import Sidebar from '@/components/atoms/sidebar/Sidebar';
 import DescriptionList from '@/components/molecules/descriptionList/DescriptionList';
-import CartOrderButton from '@/components/molecules/cart/CartOrderButton';
+import Button from '@/components/atoms/buttons/Button';
+import SidebarButton from '@/components/molecules/sidebar/SidebarButton';
 
 import numberFormat from '@/utils/numberFormat';
 
 import { space } from '@/styles/sizes';
+import { useRouter } from 'next/router';
 
 type CartSidebarProps = {
   totalPrice: number;
 }
 
 export default function CartSidebar({ totalPrice }: CartSidebarProps) {
+  const router = useRouter();
+
+  const handleClickMoveOrderPage = () => {
+    router.push('/order');
+  };
+
   return (
     <Sidebar>
       <DescriptionList
@@ -44,7 +52,15 @@ export default function CartSidebar({ totalPrice }: CartSidebarProps) {
       >
         {`${numberFormat(totalPrice)} 원`}
       </DescriptionList>
-      <CartOrderButton />
+      <SidebarButton>
+        <Button
+          type="button"
+          isPrimary
+          onClick={handleClickMoveOrderPage}
+        >
+          주문하기
+        </Button>
+      </SidebarButton>
     </Sidebar>
   );
 }

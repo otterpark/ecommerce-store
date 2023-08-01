@@ -11,7 +11,7 @@ export default function useProduct() {
 
   const categories = useSWR<Category[]>(GET_CATEGORIES, getCategories);
   // eslint-disable-next-line max-len
-  const productList = (categoryId: string) => useSWR<Product[]>(`/api/${GET_PRODUCT_LIST}?categoryId=${categoryId}`, () => getProductList(categoryId));
+  const productList = (categoryId: string) => useSWR<Product[]>(`${GET_PRODUCT_LIST}?categoryId=${categoryId}`, () => getProductList(categoryId));
 
   const product = (productId: string) => useSWR<ProductDetail>(`${GET_PRODUCT}/${productId}`, getProduct);
 

@@ -1,11 +1,11 @@
-import styled from 'styled-components';
+import { ReactNode } from 'react';
 
-import Button from '@/components/atoms/buttons/Button';
+import styled from 'styled-components';
 
 import { breakpoints } from '@/styles/medias';
 import { space } from '@/styles/sizes';
 
-const OrderButton = styled.div`
+const StyledSidebarButton = styled.div`
   ${breakpoints.tablet} {
     position: fixed;
     left: 0;
@@ -16,10 +16,14 @@ const OrderButton = styled.div`
     padding: ${space.m} ${space.s} ${space.s};
   }
 `;
-export default function CartOrderButton() {
+
+type SidebarButtonProps = {
+  children: ReactNode;
+}
+export default function SidebarButton({ children }: SidebarButtonProps) {
   return (
-    <OrderButton>
-      <Button type="button" isPrimary>주문하기</Button>
-    </OrderButton>
+    <StyledSidebarButton>
+      {children}
+    </StyledSidebarButton>
   );
 }

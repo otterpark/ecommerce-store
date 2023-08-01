@@ -32,11 +32,11 @@ const Options = styled.ul`
 type ProductOptionsProps = {
   data: ProductDetail;
   index: number;
-  handleOptionClick: (optionId: string, itemId: string) => void;
+  handleClickOption: (optionId: string, itemId: string) => void;
 }
 
 export default function ProductOptions({
-  data, index, handleOptionClick,
+  data, index, handleClickOption,
 }: ProductOptionsProps) {
   return (
     <Options>
@@ -45,7 +45,7 @@ export default function ProductOptions({
           key={item.id}
           option={data.options[index]}
           item={item}
-          handleOptionClick={handleOptionClick}
+          handleClickOption={handleClickOption}
         />
       ))}
     </Options>

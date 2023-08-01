@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
@@ -6,9 +7,9 @@ import MaxWidthWrap from '@/components/atoms/wrap/MaxWidthWrap';
 
 import { maxWidth, space } from '@/styles/sizes';
 
-import { useAppSelector } from '@/hooks/useReduxWithType';
-
 import useUserService from '@/services/userService';
+
+import useAuth from '@/hooks/useAuth';
 
 const TopBarWrap = styled.div`
   padding: ${space.xs} ${space.s};
@@ -31,12 +32,16 @@ const TopBarUl = styled.ul`
   }
 `;
 export default function TopBar() {
-  const auth = useAppSelector((state) => state.auth);
+  const router = useRouter();
+
+  const { auth } = useAuth();
+
   const { logout } = useUserService();
 
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     logout();
+    router.push('/');
   };
 
   return (

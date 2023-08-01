@@ -9,13 +9,13 @@ const context = describe;
 
 describe('ProductOption ', () => {
   const mockProduct = mockProductDetail;
-  const handleOptionClick = jest.fn();
+  const handleClickOption = jest.fn();
 
   const renderProductOptionComponent = () => render(
     <ProductOption
       option={mockProduct.options[0]}
       item={mockProduct.options[0].items[0]}
-      handleOptionClick={handleOptionClick}
+      handleClickOption={handleClickOption}
     />,
   );
 
@@ -26,13 +26,13 @@ describe('ProductOption ', () => {
   });
 
   context('when click product option', () => {
-    it('should call handleOptionClick event', async () => {
+    it('should call handleClickOption event', async () => {
       renderProductOptionComponent();
 
       const option = screen.getByTestId('item-white');
       await userEvent.click(option);
 
-      expect(handleOptionClick).toBeCalledTimes(1);
+      expect(handleClickOption).toBeCalledTimes(1);
     });
   });
 });

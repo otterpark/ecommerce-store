@@ -11,14 +11,15 @@ type DescriptionListProps = {
   isTextBold?: boolean;
   isSpaceBetween?: boolean;
   isBorder?: boolean;
+  isMobileHidedt?: boolean;
 }
 
-type StyledDescriptionListProps = Pick<DescriptionListProps, 'isSpaceBetween' | 'isBorder' | 'isTextBold' | 'padding'>
+type StyledDescriptionListProps = Pick<DescriptionListProps, 'isSpaceBetween' | 'isBorder' | 'isTextBold' | 'padding' | 'isMobileHidedt'>
 
 const StyledDescriptionList = styled.dl<StyledDescriptionListProps>`
-  display: flex;
-  display:inline-flex;
+  display: inline-flex;
   flex-direction: row;
+  align-items: center;
   width: 100%;
   padding: ${(props) => props.padding};
   ${(props) => props.isBorder && css`
@@ -29,6 +30,11 @@ const StyledDescriptionList = styled.dl<StyledDescriptionListProps>`
     width: 110px;
     height: 100%;
     font-size: ${fontSize.s};
+    ${(props) => props.isMobileHidedt && css`
+      ${breakpoints.tablet} {
+        display: none;
+      }
+    `};
   }
   dd {
     flex: 1;
@@ -45,7 +51,7 @@ const StyledDescriptionList = styled.dl<StyledDescriptionListProps>`
   }
 
   ${breakpoints.tablet} {
-    padding: ${space.s} ${space.s};
+    padding: ${space.xs} ${space.xs};
     :first-child {
       border-top: 0;
     }
@@ -61,6 +67,7 @@ export default function DescriptionList({
   isBorder = true,
   isSpaceBetween = false,
   isTextBold = false,
+  isMobileHidedt = false,
   padding = `${space.s} ${space.xs}`,
 }: DescriptionListProps) {
   return (
@@ -68,6 +75,7 @@ export default function DescriptionList({
       isSpaceBetween={isSpaceBetween}
       isBorder={isBorder}
       isTextBold={isTextBold}
+      isMobileHidedt={isMobileHidedt}
       padding={padding}
     >
       <dt>{listTitle}</dt>

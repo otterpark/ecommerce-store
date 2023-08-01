@@ -8,15 +8,11 @@ import { breakpoints } from '@/styles/medias';
 
 const TotalPrice = styled.div`
   flex: 1 1 0;
-
   ${breakpoints.desktop} {
-    flex: none;
     width: auto;
-    padding-left: 7rem;
   }
 
   ${breakpoints.tablet} {
-    flex: 1 1 0;
     padding-left: 0;
   }
 

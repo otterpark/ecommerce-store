@@ -14,22 +14,22 @@ const StyledCartItemTitle = styled.div`
   overflow: hidden;
   white-space: nowrap;
   word-break: break-all;
-  width: 400px;
+  width: 60%;
   a {
     display: flex;
     text-decoration: none;
   }
 
   ${breakpoints.largeDesktop} {
-    width: 350px;
+    width: 65%;
   }
 
   ${breakpoints.desktop} {
-    width: 360px;
+    width: 60%;
   }
 
   ${breakpoints.tablet} {
-    width: 220px;
+    width: 65%;
   }
 `;
 
@@ -55,15 +55,15 @@ export default function CartItemTitle({ lineItem }: CartItemTitleProps) {
           color="text"
         />
         { windowSize.width < size.largeDesktop
-            && (
-              <Text
-                textSize="s"
-                textWeight="bold"
-                textAlign="center"
-                text={`(${lineItem.quantity})`}
-                color="text"
-              />
-            )}
+          && (
+            <Text
+              textSize="s"
+              textWeight="bold"
+              textAlign="center"
+              text={`(${lineItem.quantity})`}
+              color="text"
+            />
+          )}
       </Link>
       <Text
         textSize="s"

@@ -2,11 +2,12 @@
 import { useRouter } from 'next/router';
 import { FunctionComponent, useEffect } from 'react';
 
+import { NextPageWithLayout } from '@/types/nextPage';
+
 import useAlert from '@/hooks/useAlert';
 import useAuth from '@/hooks/useAuth';
 
 import { ERROR_MESSAGE } from '@/constants';
-import { NextPageWithLayout } from '@/pages/_app.page';
 
 export default function withAccessPermission<P extends object>(
   WrappedComponent: FunctionComponent<P> & NextPageWithLayout,

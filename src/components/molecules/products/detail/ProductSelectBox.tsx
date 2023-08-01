@@ -20,7 +20,7 @@ type ProductSelectBoxProps = {
   index: number;
   selectedOptions: SelectedOptions
   toggleDropdown: (optionId: string) => void;
-  handleOptionClick: (optionId: string, itemId: string) => void;
+  handleClickOption: (optionId: string, itemId: string) => void;
 }
 
 const Arrow = styled.div`
@@ -31,7 +31,7 @@ const Arrow = styled.div`
 `;
 
 export default function ProductSelectBox({
-  data, openSelect, index, selectedOptions, toggleDropdown, handleOptionClick,
+  data, openSelect, index, selectedOptions, toggleDropdown, handleClickOption,
 }: ProductSelectBoxProps) {
   const option = data.options[index];
 
@@ -60,7 +60,7 @@ export default function ProductSelectBox({
         <ProductOptions
           data={data}
           index={index}
-          handleOptionClick={handleOptionClick}
+          handleClickOption={handleClickOption}
         />
       )}
     </StyledSelectBox>
